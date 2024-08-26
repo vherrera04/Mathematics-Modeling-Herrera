@@ -67,9 +67,9 @@ void setInitailConditions()
 	Position.y = 0.0;
 	Position.z = 0.0;
 	
-	Velocity.x = 0.5;
-	Velocity.y = 0.5;
-	Velocity.z = 0.5;
+	Velocity.x = 1.0;
+	Velocity.y = 1.0;
+	Velocity.z = 1.0;
 	
 	Force.x = 0.0;
 	Force.y = 0.0;
