@@ -140,9 +140,9 @@ void drawPicture()
 void getForces()
 {
 	// !!!! you probably should work on these guys/gals.
-	Force.x = 0.0;
-	Force.y = 0.0;
-	Force.z = 0.0;
+	Force.x = 1.0;
+	Force.y = 0.5;
+	Force.z = 1.0;
 }
 
 void updatePositions()
