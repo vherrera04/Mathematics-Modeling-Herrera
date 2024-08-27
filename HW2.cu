@@ -1,4 +1,4 @@
-//nvcc HW2.cu -o bounce -lglut -lm -lGLU -lGL																													
+//nvcc HW2.cu -o myHW2 -lglut -lm -lGLU -lGL																													
 //To stop hit "control c" in the window you launched it from.
 #include <iostream>
 #include <fstream>
@@ -150,33 +150,45 @@ void getForces()
 	{
 		howMuch = -halfSide - (Position.x - ballRadius);
 		Force.x += wallStiffness*howMuch;
+		// Apply inelastic collision effect
+        	Velocity.x *= -RestitutionCoefficient;
 	}
 	else if(halfSide < (Position.x + ballRadius))
 	{
 		howMuch = (Position.x + ballRadius) - halfSide;
 		Force.x -= wallStiffness*howMuch;
+		// Apply inelastic collision effect
+        	Velocity.x *= -RestitutionCoefficient;
 	}
 	
 	if((Position.y - ballRadius) < -halfSide)
 	{
 		howMuch = -halfSide - (Position.y - ballRadius);
 		Force.y += wallStiffness*howMuch;
+		// Apply inelastic collision effect
+        	Velocity.y *= -RestitutionCoefficient;
 	}
 	else if(halfSide < (Position.y + ballRadius))
 	{
 		howMuch = (Position.y + ballRadius) - halfSide;
 		Force.y -= wallStiffness*howMuch;
+		// Apply inelastic collision effect
+        	Velocity.y *= -RestitutionCoefficient;
 	}
 	
 	if((Position.z - ballRadius) < -halfSide)
 	{
 		howMuch = -halfSide - (Position.z - ballRadius);
 		Force.z += wallStiffness*howMuch;
+		// Apply inelastic collision effect
+        	Velocity.z *= -RestitutionCoefficient;
 	}
 	else if(halfSide < (Position.z + ballRadius))
 	{
 		howMuch = (Position.z + ballRadius) - halfSide;
 		Force.z -= wallStiffness*howMuch;
+		// Apply inelastic collision effect
+        	Velocity.z *= -RestitutionCoefficient;
 	}
 }
 
