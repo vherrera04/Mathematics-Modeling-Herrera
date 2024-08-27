@@ -1,4 +1,5 @@
-//nvcc ballInABox.cu -o bounce -lglut -lm -lGLU -lGL																													
+nvcc ballInABox.cu -o bounce -lglut -lm -lGLU -lGL
+./bounce
 //To stop hit "control c" in the window you launched it from.
 #include <iostream>
 #include <fstream>
@@ -143,6 +144,20 @@ void getForces()
 	Force.x = 0.0;
 	Force.y = 0.0;
 	Force.z = 0.0;
+
+ float halfDiameter = SphereDiameter / 2.0
+
+ if (Position.x + halfDiameter > BoxSideLength / 2.0 || Position.x - halfDiameter < -BoxSideLength / 2.0) 
+    {
+        Velocity.x = -Velocity.x;  // Reverse X direction
+    }
+    if (Position.y + halfDiameter > BoxSideLength / 2.0 || Position.y - halfDiameter < -BoxSideLength / 2.0) 
+    {
+        Velocity.y = -Velocity.y;  // Reverse Y direction
+    }
+    if (Position.z + halfDiameter > BoxSideLength / 2.0 || Position.z - halfDiameter < -BoxSideLength / 2.0) 
+    {
+        Velocity.z = -Velocity.z;  // Reverse Z direction
 }
 
 void updatePositions()
