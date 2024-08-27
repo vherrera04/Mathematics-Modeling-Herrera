@@ -1,4 +1,4 @@
-nvcc HW1.cu -o myHW1 -lglut -lm -lGLU -lGL
+//nvcc HW1.cu -o myHW1 -lglut -lm -lGLU -lGL
 //To stop hit "control c" in the window you launched it from.
 #include <iostream>
 #include <fstream>
@@ -67,9 +67,9 @@ void setInitailConditions()
 	Position.y = 0.0;
 	Position.z = 0.0;
 	
-	Velocity.x = 1.0;
-	Velocity.y = 1.0;
-	Velocity.z = 1.0;
+	Velocity.x = 50.0;
+	Velocity.y = 60.0;
+	Velocity.z = 50.0;
 	
 	Force.x = 0.0;
 	Force.y = 0.0;
@@ -144,7 +144,7 @@ void getForces()
 	Force.y = 0.0;
 	Force.z = 0.0;
 
- float halfDiameter = SphereDiameter / 2.0
+ float halfDiameter = SphereDiameter / 2.0;
 
  if (Position.x + halfDiameter > BoxSideLength / 2.0 || Position.x - halfDiameter < -BoxSideLength / 2.0) 
     {
@@ -157,6 +157,7 @@ void getForces()
     if (Position.z + halfDiameter > BoxSideLength / 2.0 || Position.z - halfDiameter < -BoxSideLength / 2.0) 
     {
         Velocity.z = -Velocity.z;  // Reverse Z direction
+    }
 }
 
 void updatePositions()
