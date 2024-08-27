@@ -1,4 +1,4 @@
-nvcc ballInABox.cu -o bounce -lglut -lm -lGLU -lGL
+nvcc HW1.cu -o myHW1 -lglut -lm -lGLU -lGL
 //To stop hit "control c" in the window you launched it from.
 #include <iostream>
 #include <fstream>
