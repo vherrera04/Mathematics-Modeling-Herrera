@@ -22,7 +22,7 @@ float4 Position, Velocity, Force;
 float SphereMass;
 float SphereDiameter;
 float BoxSideLength;
-float RestitutionCoefficient = 0.99; // Coefficient of restitution for inelastic collision
+float RestitutionCoefficient = 0.9; // Coefficient of restitution for inelastic collision
 
 // Window globals
 static int Window;
@@ -72,8 +72,8 @@ void setInitailConditions()
 	Position.y = 0.0;
 	Position.z = 0.0;
 	
-	Velocity.x = 44.0;
-	Velocity.y = 20.0;
+	Velocity.x = 61.0;
+	Velocity.y = 40.0;
 	Velocity.z = 10.0;
 	
 	Force.x = 0.0;
@@ -152,14 +152,14 @@ void getForces()
 		howMuch = -halfSide - (Position.x - ballRadius);
 		Force.x += wallStiffness*howMuch;
 		// Apply inelastic collision effect
-        	Velocity.x *= -RestitutionCoefficient;
+        	Velocity.x *= RestitutionCoefficient;
 	}
 	else if(halfSide < (Position.x + ballRadius))
 	{
 		howMuch = (Position.x + ballRadius) - halfSide;
 		Force.x -= wallStiffness*howMuch;
 		// Apply inelastic collision effect
-        	Velocity.x *= -RestitutionCoefficient;
+        	Velocity.x *= RestitutionCoefficient;
 	}
 	
 	if((Position.y - ballRadius) < -halfSide)
@@ -167,14 +167,14 @@ void getForces()
 		howMuch = -halfSide - (Position.y - ballRadius);
 		Force.y += wallStiffness*howMuch;
 		// Apply inelastic collision effect
-        	Velocity.y *= -RestitutionCoefficient;
+        	Velocity.y *= RestitutionCoefficient;
 	}
 	else if(halfSide < (Position.y + ballRadius))
 	{
 		howMuch = (Position.y + ballRadius) - halfSide;
 		Force.y -= wallStiffness*howMuch;
 		// Apply inelastic collision effect
-        	Velocity.y *= -RestitutionCoefficient;
+        	Velocity.y *= RestitutionCoefficient;
 	}
 	
 	if((Position.z - ballRadius) < -halfSide)
@@ -182,14 +182,14 @@ void getForces()
 		howMuch = -halfSide - (Position.z - ballRadius);
 		Force.z += wallStiffness*howMuch;
 		// Apply inelastic collision effect
-        	Velocity.z *= -RestitutionCoefficient;
+        	Velocity.z *= RestitutionCoefficient;
 	}
 	else if(halfSide < (Position.z + ballRadius))
 	{
 		howMuch = (Position.z + ballRadius) - halfSide;
 		Force.z -= wallStiffness*howMuch;
 		// Apply inelastic collision effect
-        	Velocity.z *= -RestitutionCoefficient;
+        	Velocity.z *= RestitutionCoefficient;
 	}
 }
 
