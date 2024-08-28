@@ -22,7 +22,7 @@ float4 Position, Velocity, Force;
 float SphereMass;
 float SphereDiameter;
 float BoxSideLength;
-float RestitutionCoefficient = 0.6; // Coefficient of restitution for inelastic collision
+float RestitutionCoefficient = 0.99; // Coefficient of restitution for inelastic collision
 
 // Window globals
 static int Window;
@@ -72,8 +72,8 @@ void setInitailConditions()
 	Position.y = 0.0;
 	Position.z = 0.0;
 	
-	Velocity.x = 11.0;
-	Velocity.y = 10.0;
+	Velocity.x = 44.0;
+	Velocity.y = 20.0;
 	Velocity.z = 10.0;
 	
 	Force.x = 0.0;
