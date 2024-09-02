@@ -274,7 +274,7 @@ void getForces()
 	}
 }
 
-void handleCollisions()
+void handleCollisions() // Checks for collisions between balls and adjusts velocities and positions.
 {
     float distance;
     float normalX, normalY, normalZ;
