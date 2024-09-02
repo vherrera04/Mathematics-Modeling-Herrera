@@ -278,7 +278,41 @@ void getForces()
 			// An eletron get pulled over by a cop. 
 			// The cop says "Mam I clocked you at 8000 miles an hour."
 			// Ms. Electron replies "Oh thanks a lot!!! Now I'm lost."
-		}
+			float dx = Position[i].x - Position[j].x;
+            		float dy = Position[i].y - Position[j].y;
+            		float dz = Position[i].z - Position[j].z;
+            		float distance = sqrt(dx * dx + dy * dy + dz * dz);
+            		float minDistance = SphereDiameter;
+
+            		if (distance < minDistance)
+           		 {
+                		// Calculate overlap
+               			float overlap = minDistance - distance;
+                
+               			// Calculate collision normal
+               			float nx = dx / distance;
+                		float ny = dy / distance;
+                		float nz = dz / distance;
+
+				// Relative velocity
+                		float relativeVx = Velocity[i].x - Velocity[j].x;
+                		float relativeVy = Velocity[i].y - Velocity[j].y;
+                		float relativeVz = Velocity[i].z - Velocity[j].z;
+                		float dotProduct = nx * relativeVx + ny * relativeVy + nz * relativeVz;
+
+                		// Calculate impulse magnitude
+                		float impulse = 2.0 * dotProduct / (SphereMass + SphereMass);
+                
+                		// Apply impulse to velocities
+                		Force[i].x -= impulse * nx;
+                		Force[i].y -= impulse * ny;
+                		Force[i].z -= impulse * nz;
+
+                		Force[j].x += impulse * nx;
+                		Force[j].y += impulse * ny;
+                		Force[j].z += impulse * nz;
+            		}
+		} 
 	}
 }
 
