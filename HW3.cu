@@ -46,6 +46,7 @@ void setInitailConditions();
 void drawPicture();
 void getForces();
 void updatePositions();
+void handleCollisions();
 void nBody();
 void startMeUp();
 
@@ -270,50 +271,77 @@ void getForces()
 			else k = wallStiffnessOut;
 			Force[i].z -= k*howMuch;
 		}
-		for(int j = i + 1; j < NUMBER_OF_BALLS; j++)
-		{
+		//for(int j = i + 1; j < NUMBER_OF_BALLS; j++)
+		//{
+			
 			// Maybe put something here and do it for i and the opposite for j.
 			// Might also need to think about magna-dude and unit vectors.
 			//
 			// An eletron get pulled over by a cop. 
 			// The cop says "Mam I clocked you at 8000 miles an hour."
 			// Ms. Electron replies "Oh thanks a lot!!! Now I'm lost."
-			float dx = Position[i].x - Position[j].x;
-            		float dy = Position[i].y - Position[j].y;
-            		float dz = Position[i].z - Position[j].z;
-            		float distance = sqrt(dx * dx + dy * dy + dz * dz);
-            		float minDistance = SphereDiameter;
-
-            		if (distance < minDistance)
-           		 {
-                		// Calculate overlap
-               			float overlap = minDistance - distance;
-                
-               			// Calculate collision normal
-               			float nx = dx / distance;
-                		float ny = dy / distance;
-                		float nz = dz / distance;
-
-				// Relative velocity
-                		float relativeVx = Velocity[i].x - Velocity[j].x;
-                		float relativeVy = Velocity[i].y - Velocity[j].y;
-                		float relativeVz = Velocity[i].z - Velocity[j].z;
-                		float dotProduct = nx * relativeVx + ny * relativeVy + nz * relativeVz;
-
-                		// Calculate impulse magnitude
-                		float impulse = 2.0 * dotProduct / (SphereMass + SphereMass);
-                
-                		// Apply impulse to velocities
-                		Force[i].x -= impulse * nx;
-                		Force[i].y -= impulse * ny;
-                		Force[i].z -= impulse * nz;
-
-                		Force[j].x += impulse * nx;
-                		Force[j].y += impulse * ny;
-                		Force[j].z += impulse * nz;
-            		}
-		} 
+		//} 
 	}
+}
+
+void handleCollisions()
+{
+    float distance;
+    float normalX, normalY, normalZ;
+    float relativeVelocityX, relativeVelocityY, relativeVelocityZ;
+    float dotProduct;
+    float restitution = 1.0; // Perfectly elastic collision
+    
+    for(int i = 0; i < NUMBER_OF_BALLS; i++)
+    {
+        for(int j = i + 1; j < NUMBER_OF_BALLS; j++)
+        {
+            // Calculate distance between ball centers
+            distance = sqrt((Position[i].x - Position[j].x) * (Position[i].x - Position[j].x) +
+                            (Position[i].y - Position[j].y) * (Position[i].y - Position[j].y) +
+                            (Position[i].z - Position[j].z) * (Position[i].z - Position[j].z));
+            
+            if(distance < SphereDiameter)
+            {
+                // Normal vector from i to j
+                normalX = (Position[j].x - Position[i].x) / distance;
+                normalY = (Position[j].y - Position[i].y) / distance;
+                normalZ = (Position[j].z - Position[i].z) / distance;
+                
+                // Relative velocity
+                relativeVelocityX = Velocity[j].x - Velocity[i].x;
+                relativeVelocityY = Velocity[j].y - Velocity[i].y;
+                relativeVelocityZ = Velocity[j].z - Velocity[i].z;
+                
+                // Dot product
+                dotProduct = normalX * relativeVelocityX +
+                             normalY * relativeVelocityY +
+                             normalZ * relativeVelocityZ;
+                
+                // Calculate new velocities
+                float massSum = SphereMass + SphereMass;
+                float coefficient = dotProduct / massSum;
+                
+                Velocity[i].x += coefficient * normalX * SphereMass;
+                Velocity[i].y += coefficient * normalY * SphereMass;
+                Velocity[i].z += coefficient * normalZ * SphereMass;
+                
+                Velocity[j].x -= coefficient * normalX * SphereMass;
+                Velocity[j].y -= coefficient * normalY * SphereMass;
+                Velocity[j].z -= coefficient * normalZ * SphereMass;
+                
+                // Update positions to ensure they are not intersecting
+                float overlap = SphereDiameter - distance;
+                Position[i].x -= normalX * overlap / 2.0;
+                Position[i].y -= normalY * overlap / 2.0;
+                Position[i].z -= normalZ * overlap / 2.0;
+                
+                Position[j].x += normalX * overlap / 2.0;
+                Position[j].y += normalY * overlap / 2.0;
+                Position[j].z += normalZ * overlap / 2.0;
+            }
+        }
+    }
 }
 
 void updatePositions()
@@ -343,6 +371,7 @@ void updatePositions()
 void nBody()
 {	
 	getForces();
+	handleCollisions();
 	updatePositions();
 	drawPicture();
 	printf("\n Time = %f", RunTime);
