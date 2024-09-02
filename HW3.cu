@@ -271,16 +271,6 @@ void getForces()
 			else k = wallStiffnessOut;
 			Force[i].z -= k*howMuch;
 		}
-		//for(int j = i + 1; j < NUMBER_OF_BALLS; j++)
-		//{
-			
-			// Maybe put something here and do it for i and the opposite for j.
-			// Might also need to think about magna-dude and unit vectors.
-			//
-			// An eletron get pulled over by a cop. 
-			// The cop says "Mam I clocked you at 8000 miles an hour."
-			// Ms. Electron replies "Oh thanks a lot!!! Now I'm lost."
-		//} 
 	}
 }
 
@@ -290,7 +280,6 @@ void handleCollisions()
     float normalX, normalY, normalZ;
     float relativeVelocityX, relativeVelocityY, relativeVelocityZ;
     float dotProduct;
-    float restitution = 1.0; // Perfectly elastic collision
     
     for(int i = 0; i < NUMBER_OF_BALLS; i++)
     {
