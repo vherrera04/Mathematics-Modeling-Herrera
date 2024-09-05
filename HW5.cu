@@ -14,7 +14,7 @@
 #include <curand.h>
 #include <curand_kernel.h>
 
-#define NUMBER_OF_BALLS 20
+#define NUMBER_OF_BALLS 2
 #define PI 3.14159
 using namespace std;
 
@@ -187,12 +187,12 @@ void setInitailConditions()
 		// Asteriods are brown not just any color. 
 		// Well I have not seen many asteriods maybe they are all the colors in the rainbow.
 		// But make them brown anyway. 
-		randomNumber = ((float)rand()/(float)RAND_MAX);
-		Color[i].x = randomNumber;
-		randomNumber = ((float)rand()/(float)RAND_MAX);
-		Color[i].y = randomNumber;
-		randomNumber = ((float)rand()/(float)RAND_MAX);
-		Color[i].z = randomNumber;
+		//randomNumber = ((float)rand()/(float)RAND_MAX);
+		Color[i].x = .36 ;
+		//randomNumber = ((float)rand()/(float)RAND_MAX);
+		Color[i].y = .25 ;
+		//randomNumber = ((float)rand()/(float)RAND_MAX);
+		Color[i].z = .2 ;
 		
 		Force[i].x = 0.0;
 		Force[i].y = 0.0;
