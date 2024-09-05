@@ -1,4 +1,4 @@
-//nvcc bouncingAsteriodsInABoxBroken.cu -o bounce -lglut -lm -lGLU -lGL																													
+//nvcc HW5.cu -o bounce -lglut -lm -lGLU -lGL																													
 //To stop hit "control c" in the window you launched it from.
 #include <iostream>
 #include <fstream>
@@ -109,7 +109,7 @@ void setInitailConditions()
 	srand((unsigned) time(&t));
 	
 	// ??????????????????????????????????????????????????????????
-	// For the units that we will use to contect us to the outside world let use 
+	// For the units that we will use to connect us to the outside world let use 
 	// kilometers (km)
 	// kilograms (kg)
 	// hours (hr)
@@ -117,22 +117,22 @@ void setInitailConditions()
 	// If you divide an outside world unit by this number it will convert it to our units
 	// Set your convertion units then print them out.
 	// Uncomment these and fix them.
-	// MassUnitConverter = ???; // kg
-	// LengthUnitConverter = ???; // km
-	// TimeUnitConverter = ???; // hr
-	// printf("\n MassUnitConverter = %f kilograms", MassUnitConverter);
-	// printf("\n LengthUnitConverter = %f kilometers", LengthUnitConverter);
-	// printf("\n TimeUnitConverter = %f hours", TimeUnitConverter);
+	MassUnitConverter = ???; // kg
+	LengthUnitConverter = ???; // km
+	TimeUnitConverter = ???; // hr
+	printf("\n MassUnitConverter = %f kilograms", MassUnitConverter);
+	printf("\n LengthUnitConverter = %f kilometers", LengthUnitConverter);
+	printf("\n TimeUnitConverter = %f hours", TimeUnitConverter);
 	
 	// ??????????????????????????????????????????????????????????
 	// Set the GavityConstant. and print it out.
 	// Uncomment these and fix them.
-	// GavityConstant = ???;
-	// printf("\n The gavity constant = %f in our units", GavityConstant);
+	GavityConstant = ???;
+	printf("\n The gavity constant = %f in our units", GavityConstant);
 	
 	// ??????????????????????????????????????????????????????????
 	// Anything with a mass, time or length needs to be thought about.
-	// Coment about each of these. Most will may not need to be changed but just say why.
+	// Comment about each of these. Most will may not need to be changed but just say why.
 	SphereDiameter = 0.5;
 	sphereRadius = SphereDiameter/2.0;
 	SphereMass = 1.0;
@@ -144,8 +144,8 @@ void setInitailConditions()
 	// Print out how many kilometers long each box side is.
 	// Print out how many kilometers/hour the max Velocity is.
 	// Uncomment these and fix them.
-	//printf("\n Box side length = %f kilometers", ???);
-	//printf("\n Max velocity = %f kilometers/hour", ???);
+	printf("\n Box side length = %f kilometers", ???);
+	printf("\n Max velocity = %f kilometers/hour", ???);
 	
 	
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
