@@ -28,12 +28,11 @@ float BoxSideLength;
 float MaxVelocity;
 int Trace;
 int Pause;
-// ????????????????????????????????????
 // I did this for you you just need to fill them in later.
 float MassUnitConverter;
 float LengthUnitConverter;
 float TimeUnitConverter;
-float GavityConstant;
+float GravityConstant;
 
 // Window globals
 static int Window;
@@ -117,18 +116,18 @@ void setInitailConditions()
 	// If you divide an outside world unit by this number it will convert it to our units
 	// Set your convertion units then print them out.
 	// Uncomment these and fix them.
-	MassUnitConverter = ???; // kg
-	LengthUnitConverter = ???; // km
-	TimeUnitConverter = ???; // hr
-	printf("\n MassUnitConverter = %f kilograms", MassUnitConverter);
-	printf("\n LengthUnitConverter = %f kilometers", LengthUnitConverter);
-	printf("\n TimeUnitConverter = %f hours", TimeUnitConverter);
+	//MassUnitConverter = (9.383x10^20); // kg ????????
+	//LengthUnitConverter = (940); // km ???????????
+	//TimeUnitConverter = (); // hr ???????????
+	//printf("\n MassUnitConverter = %f kilograms", MassUnitConverter);
+	//printf("\n LengthUnitConverter = %f kilometers", LengthUnitConverter);
+	//printf("\n TimeUnitConverter = %f hours", TimeUnitConverter);
 	
 	// ??????????????????????????????????????????????????????????
-	// Set the GavityConstant. and print it out.
+	// Set the GravityConstant. and print it out.
 	// Uncomment these and fix them.
-	GavityConstant = ???;
-	printf("\n The gavity constant = %f in our units", GavityConstant);
+	//GravityConstant = ???;
+	//printf("\n The gravity constant = %f in our units", GravityConstant);
 	
 	// ??????????????????????????????????????????????????????????
 	// Anything with a mass, time or length needs to be thought about.
@@ -144,8 +143,8 @@ void setInitailConditions()
 	// Print out how many kilometers long each box side is.
 	// Print out how many kilometers/hour the max Velocity is.
 	// Uncomment these and fix them.
-	printf("\n Box side length = %f kilometers", ???);
-	printf("\n Max velocity = %f kilometers/hour", ???);
+	//printf("\n Box side length = %f kilometers", ???);
+	//printf("\n Max velocity = %f kilometers/hour", ???);
 	
 	
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
