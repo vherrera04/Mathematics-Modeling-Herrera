@@ -14,7 +14,7 @@
 #include <curand.h>
 #include <curand_kernel.h>
 
-#define NUMBER_OF_BALLS 2
+#define NUMBER_OF_BALLS 20
 #define PI 3.14159
 using namespace std;
 
