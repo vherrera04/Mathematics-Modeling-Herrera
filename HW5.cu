@@ -28,6 +28,7 @@ float BoxSideLength;
 float MaxVelocity;
 int Trace;
 int Pause;
+// ????????????????????????????????????
 // I did this for you you just need to fill them in later.
 float MassUnitConverter;
 float LengthUnitConverter;
@@ -336,7 +337,7 @@ void getForces()
 			// This causes the asteroids to bounce off of each other.
 			if(d < SphereDiameter)
 			{
-				magnitude = kBall*d;
+				magnitude = kBall*(SphereDiameter - d);
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*(dx/d);
 				Force[i].y -= magnitude*(dy/d);
