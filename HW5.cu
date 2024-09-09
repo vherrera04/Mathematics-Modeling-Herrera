@@ -116,17 +116,21 @@ void setInitailConditions()
 	// If you multiply one of our units by this number it will convert it to the outside world units.
 	// If you divide an outside world unit by this number it will convert it to our units
 	// Set your conversion units then print them out.
-	MassUnitConverter = 9.383x10^20 ; // kg ????????
+	// Uncomment these and fix them.
+	MassUnitConverter = 9.383e20 ; // kg ????????
 	LengthUnitConverter = 940; // km ???????????
 	TimeUnitConverter = 3640/3600; // hr ???????????
 	printf("\n MassUnitConverter = %f kilograms", MassUnitConverter);
 	printf("\n LengthUnitConverter = %f kilometers", LengthUnitConverter);
 	printf("\n TimeUnitConverter = %f hours", TimeUnitConverter);
 	
+	// ??????????????????????????????????????????????????????????
 	// Set the GravityConstant. and print it out.
+	// Uncomment these and fix them.
 	GravityConstant = 1.0;
 	printf("\n The gravity constant = %f in our units", GravityConstant);
 	
+	// ??????????????????????????????????????????????????????????
 	// Anything with a mass, time or length needs to be thought about.
 	// Comment about each of these. Most will may not need to be changed but just say why.
 	SphereDiameter = 0.5;
@@ -135,10 +139,11 @@ void setInitailConditions()
 	BoxSideLength = 5.0;
 	MaxVelocity = 10.0;
 	halfBoxSideLength = BoxSideLength/2.0;
-	
+
+	// ??????????????????????????????????????????????????????????
 	// Print out how many kilometers long each box side is.
 	// Print out how many kilometers/hour the max Velocity is.
-
+	// Uncomment these and fix them.
 	printf("\n Box side length = %f kilometers", BoxSideLength);
 	printf("\n Max velocity = %f kilometers/hour", MaxVelocity);
 	
@@ -178,7 +183,8 @@ void setInitailConditions()
 		Velocity[i].y = randomNumber;
 		randomNumber = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*MaxVelocity;
 		Velocity[i].z = randomNumber;
-		
+
+		// ?????????????????????????????????????????
 		// Asteriods are brown not just any color. 
 		// Well I have not seen many asteriods maybe they are all the colors in the rainbow.
 		// But make them brown anyway. 
@@ -264,7 +270,7 @@ void getForces()
 	float wallStiffnessOut = 8000.0;
 	float kWall, kBall;
 	float halfSide = BoxSideLength/2.0;
-	float amiuntOut;
+	float amountOut;
 	float ballRadius = SphereDiameter/2.0;
 	float d, dx, dy, dz;
 	float magnitude;
@@ -278,47 +284,47 @@ void getForces()
 
 		if((Position[i].x - ballRadius) < -halfSide)
 		{
-			amiuntOut = -halfSide - (Position[i].x - ballRadius);
+			amountOut = -halfSide - (Position[i].x - ballRadius);
 			if(Velocity[i].x < 0.0) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].x += kWall*amiuntOut;
+			Force[i].x += kWall*amountOut;
 		}
 		else if(halfSide < (Position[i].x + ballRadius))
 		{
-			amiuntOut = (Position[i].x + ballRadius) - halfSide;
+			amountOut = (Position[i].x + ballRadius) - halfSide;
 			if(0.0 < Velocity[i].x) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].x -= kWall*amiuntOut;
+			Force[i].x -= kWall*amountOut;
 		}
 		
 		if((Position[i].y - ballRadius) < -halfSide)
 		{
-			amiuntOut = -halfSide - (Position[i].y - ballRadius);
+			amountOut = -halfSide - (Position[i].y - ballRadius);
 			if(Velocity[i].y < 0.0) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].y += kWall*amiuntOut;
+			Force[i].y += kWall*amountOut;
 		}
 		else if(halfSide < (Position[i].y + ballRadius))
 		{
-			amiuntOut = (Position[i].y + ballRadius) - halfSide;
+			amountOut = (Position[i].y + ballRadius) - halfSide;
 			if(0.0 < Velocity[i].y) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].y -= kWall*amiuntOut;
+			Force[i].y -= kWall*amountOut;
 		}
 		
 		if((Position[i].z - ballRadius) < -halfSide)
 		{
-			amiuntOut = -halfSide - (Position[i].z - ballRadius);
+			amountOut = -halfSide - (Position[i].z - ballRadius);
 			if(Velocity[i].z < 0.0) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].z += kWall*amiuntOut;
+			Force[i].z += kWall*amountOut;
 		}
 		else if(halfSide < (Position[i].z + ballRadius))
 		{
-			amiuntOut = (Position[i].z + ballRadius) - halfSide;
+			amountOut = (Position[i].z + ballRadius) - halfSide;
 			if(0.0 < Velocity[i].z) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].z -= kWall*amiuntOut;
+			Force[i].z -= kWall*amountOut;
 		}
 		
 		for(int j = 0; j < i; j++)
@@ -329,9 +335,10 @@ void getForces()
 			d = sqrt(dx*dx + dy*dy + dz*dz);
 			
 			// This causes the asteroids to bounce off of each other.
-			if(d < SphereDiameter)
+			if(d < SphereDiameter)  //if (d < SphereDiameter) d = SphereDiameter;
 			{
 				magnitude = kBall*(SphereDiameter - d);
+				//  magnitude = GavityConstant * (SphereMass * SphereMass) / (d * d);
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*(dx/d);
 				Force[i].y -= magnitude*(dy/d);
@@ -344,6 +351,15 @@ void getForces()
 			
 			// ???????????????????????????????????????????????????????
 			// Add gravity between asteroids here.
+
+			
+			// Two elderly ladies get pulled over by a cop on I-35 in Dallas.
+			// The cop says "Mam you were going 35 miles an hour in a 70. You are causing a trafic jam 
+			// and may get someone, perhaps yourself, hurt".
+			// He turns his atention to the lady in the pasangers seat and says "mam
+			// are you okay", because she was breathing really hard and looked completely freaked out.
+			// She replied " Yes young man I will be okay in a minute. We just pulled off of 
+			// highway 114.
 			
 		}
 	}
@@ -378,6 +394,7 @@ void nBody()
 	getForces();
 	updatePositions();
 	drawPicture();
+	// ??????????????????????????????????????????????
 	// Print the time out in hours.
 	printf("\n Time = %f hours", RunTime);
 	RunTime += Dt;
