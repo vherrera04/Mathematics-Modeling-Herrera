@@ -35,7 +35,7 @@ int PrintCount;
 float MassUnitConverter;
 float LengthUnitConverter;
 float TimeUnitConverter;
-float GavityConstant;
+float GravityConstant;
 
 // Window globals
 static int Window;
@@ -152,8 +152,8 @@ void setInitailConditions()
 	printf("\n TimeUnitConverter = %e hours", TimeUnitConverter);
 	
 	// If we did everthing right the universal gravity constant should be 1.
-	GavityConstant = 1.0;
-	printf("\n The gavity constant = %f in our units", GavityConstant);
+	GravityConstant = 1.0;
+	printf("\n The gravity constant = %f in our units", GravityConstant);
 	
 	// All spheres are the same diameter and mass of Ceres so these should be 1..
 	SphereDiameter = 1.0;
@@ -406,7 +406,7 @@ void getForces()
 			}
 			
 			// This adds the gravity between asteroids.
-			magnitude = GavityConstant*SphereMass*SphereMass/(d*d);
+			magnitude = GravityConstant*SphereMass*SphereMass/(d*d);
 			Force[i].x += magnitude*(dx/d);
 			Force[i].y += magnitude*(dy/d);
 			Force[i].z += magnitude*(dz/d);
