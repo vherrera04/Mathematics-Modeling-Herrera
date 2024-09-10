@@ -117,9 +117,9 @@ void setInitailConditions()
 	// If you divide an outside world unit by this number it will convert it to our units
 	// Set your conversion units then print them out.
 	// Uncomment these and fix them.
-	MassUnitConverter = 9.383e20 ; // kg ????????
-	LengthUnitConverter = 940; // km ???????????
-	TimeUnitConverter = 3640/3600; // hr ???????????
+	MassUnitConverter = 9.383e20 ; // kg From HW4
+	LengthUnitConverter = 940; // km From HW4
+	TimeUnitConverter = 3640/3600; // hr From HW4
 	printf("\n MassUnitConverter = %f kilograms", MassUnitConverter);
 	printf("\n LengthUnitConverter = %f kilometers", LengthUnitConverter);
 	printf("\n TimeUnitConverter = %f hours", TimeUnitConverter);
@@ -189,11 +189,11 @@ void setInitailConditions()
 		// Well I have not seen many asteriods maybe they are all the colors in the rainbow.
 		// But make them brown anyway. 
 		//randomNumber = ((float)rand()/(float)RAND_MAX);
-		Color[i].x = .36 ;
+		Color[i].x = 0.36 ;//red
 		//randomNumber = ((float)rand()/(float)RAND_MAX);
-		Color[i].y = .25 ;
+		Color[i].y = 0.25 ;//green
 		//randomNumber = ((float)rand()/(float)RAND_MAX);
-		Color[i].z = .2 ;
+		Color[i].z = 0.2 ;//blue
 		
 		Force[i].x = 0.0;
 		Force[i].y = 0.0;
@@ -202,7 +202,7 @@ void setInitailConditions()
 	
 	// ?????????????????????????????????????????
 	// Make this a 10 day long run
-	TotalRunTime = 10.0;
+	TotalRunTime = 864000.0; // convert to seconds by multiplying 10 days by 24 hours. multiply that by 3600 seconds
 	RunTime = 0.0;
 	Dt = 0.001;
 }
@@ -338,7 +338,7 @@ void getForces()
 			if(d < SphereDiameter)  //if (d < SphereDiameter) d = SphereDiameter;
 			{
 				magnitude = kBall*(SphereDiameter - d);
-				//  magnitude = GavityConstant * (SphereMass * SphereMass) / (d * d);
+				//  magnitude = gravityConstant * (SphereMass * SphereMass) / (d * d);
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*(dx/d);
 				Force[i].y -= magnitude*(dy/d);
@@ -396,10 +396,11 @@ void nBody()
 	drawPicture();
 	// ??????????????????????????????????????????????
 	// Print the time out in hours.
-	printf("\n Time = %f hours", RunTime);
+	double RunTimeInHours = RunTime / 24.0; //used to convert seconds into hours
+	printf("\n Time = %f hours", RunTimeInHours);
 	RunTime += Dt;
 	
-	if(TotalRunTime < RunTime)
+	if(RunTime >= TotalRunTime)
 	{
 		glutDestroyWindow(Window);
 		printf("\n Later Dude \n");
