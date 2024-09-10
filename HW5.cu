@@ -118,8 +118,8 @@ void setInitailConditions()
 	// Set your conversion units then print them out.
 	// Uncomment these and fix them.
 	MassUnitConverter = 9.383e20 ; // kg From HW4
-	LengthUnitConverter = 940; // km From HW4
-	TimeUnitConverter = 3640/3600; // hr From HW4
+	LengthUnitConverter = 940.0; // km From HW4
+	TimeUnitConverter = 3640.0 / 3600.0; // hr From HW4
 	printf("\n MassUnitConverter = %f kilograms", MassUnitConverter);
 	printf("\n LengthUnitConverter = %f kilometers", LengthUnitConverter);
 	printf("\n TimeUnitConverter = %f hours", TimeUnitConverter);
@@ -127,7 +127,7 @@ void setInitailConditions()
 	// ??????????????????????????????????????????????????????????
 	// Set the GravityConstant. and print it out.
 	// Uncomment these and fix them.
-	GravityConstant = 1.0;
+	GravityConstant = 1.0; 
 	printf("\n The gravity constant = %f in our units", GravityConstant);
 	
 	// ??????????????????????????????????????????????????????????
@@ -335,10 +335,9 @@ void getForces()
 			d = sqrt(dx*dx + dy*dy + dz*dz);
 			
 			// This causes the asteroids to bounce off of each other.
-			if(d < SphereDiameter)  //if (d < SphereDiameter) d = SphereDiameter;
+			if(d < SphereDiameter)  
 			{
 				magnitude = kBall*(SphereDiameter - d);
-				//  magnitude = gravityConstant * (SphereMass * SphereMass) / (d * d);
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*(dx/d);
 				Force[i].y -= magnitude*(dy/d);
@@ -351,6 +350,19 @@ void getForces()
 			
 			// ???????????????????????????????????????????????????????
 			// Add gravity between asteroids here.
+			if (d > 0.0) // This is to prevent division by zero
+            		{
+              			float gravitationalForceMagnitude = GravityConstant * SphereMass * SphereMass / (d * d);
+               			// Apply gravitational force in the direction of the other ball
+                		Force[i].x += gravitationalForceMagnitude * (dx / d);
+               		 	Force[i].y += gravitationalForceMagnitude * (dy / d);
+                		Force[i].z += gravitationalForceMagnitude * (dz / d);
+                
+                		// Apply opposite gravitational force to the other ball
+                		Force[j].x -= gravitationalForceMagnitude * (dx / d);
+                		Force[j].y -= gravitationalForceMagnitude * (dy / d);
+                		Force[j].z -= gravitationalForceMagnitude * (dz / d);
+            		}
 
 			
 			// Two elderly ladies get pulled over by a cop on I-35 in Dallas.
