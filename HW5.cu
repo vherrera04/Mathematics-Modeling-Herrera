@@ -352,7 +352,7 @@ void getForces()
 			// Add gravity between asteroids here.
 			if (d > 0.0) // This is to prevent division by zero
             		{
-              			float gravitationalForceMagnitude = GravityConstant * SphereMass * SphereMass / (d * d);
+              			float gravitationalForceMagnitude = GravityConstant * SphereMass * SphereMass / (d * d); //This is the formula for gravitational force
                			// Apply gravitational force in the direction of the other ball
                 		Force[i].x += gravitationalForceMagnitude * (dx / d);
                		 	Force[i].y += gravitationalForceMagnitude * (dy / d);
@@ -408,7 +408,7 @@ void nBody()
 	drawPicture();
 	// ??????????????????????????????????????????????
 	// Print the time out in hours.
-	double RunTimeInHours = RunTime / 24.0; //used to convert seconds into hours
+	double RunTimeInHours = RunTime / 3600.0; //used to convert seconds into hours
 	printf("\n Time = %f hours", RunTimeInHours);
 	RunTime += Dt;
 	
