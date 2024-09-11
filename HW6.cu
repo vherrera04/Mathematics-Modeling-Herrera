@@ -169,7 +169,7 @@ void setInitialConditions()
 	// If you multiply one of our units by this number it will convert it the outside world units.
 	// If you divide an outside world unit by this number it will convert it to our units
 	// We are setting the mass unit to be the mass of Ceres.
-	// We are settting the length unit to be th diameter of Ceres.
+	// We are setting the length unit to be th diameter of Ceres.
 	// We are setting the time unit to be the such that the universal gravity constant is 1.
 	MassUnitConverter = 9.383e20; // kg
 	LengthUnitConverter = 940.0; // km
@@ -182,13 +182,13 @@ void setInitialConditions()
 	GravityConstant = 1.0;
 	printf("\n The gravity constant = %f in our units", GravityConstant);
 	
-	// All spheres are the same diameter and mass of Ceres so these should be 1..
+	// All spheres are the same diameter and mass of Ceres so these should be 1.
 	SphereDiameter = 1.0;
 	SphereMass = 1.0;
 	//sphereRadius = SphereDiameter/2.0;
 	
 	// You get to pick this but it is nice to print it out in common units to get a feel for what it is.
-	MaxVelocity = 10.0;
+	MaxVelocity = 5.0;
 	printf("\n Max velocity = %f kilometers/hour or %f miles/hour", MaxVelocity*LengthUnitConverter/TimeUnitConverter, (MaxVelocity*LengthUnitConverter/TimeUnitConverter)*0.621371);
 	
 	// ??????????????????????????????????????????????????
@@ -255,7 +255,7 @@ void setInitialConditions()
 	TotalRunTime = 10.0*24.0/TimeUnitConverter;
 	RunTime = 0.0;
 	Dt = 0.001;
-	// How many time steps between termenal prints
+	// How many time steps between terminal prints
 	PrintRate = 10;
 }
 
@@ -318,7 +318,6 @@ void getForces()
 		// Asteroids are free spirits. You can't keep them in a box. 
 		// Take them out of the box and let them run free, as they were meant to live!
 		
-		
 		for(int j = 0; j < i; j++)
 		{
 			dx = Position[j].x - Position[i].x;
@@ -343,10 +342,7 @@ void getForces()
 					exit(0);
 				}
 
-				inOut = SphereDiameter - d; //calculates the overlap between two spheres
-
- 				// Compute repulsive force magnitude with reduction for inelastic collisions
-				magnitude = kSphere*inOut*kSphereReduction;
+				magnitude = kSphere*(SphereDiameter - d)*kSphereReduction;
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*(dx/d);
 				Force[i].y -= magnitude*(dy/d);
@@ -361,12 +357,12 @@ void getForces()
                 		dvy = Velocity[j].y - Velocity[i].y;
                 		dvz = Velocity[j].z - Velocity[i].z;
                 
-                		float dotProduct = dx * dvx + dy * dvy + dz * dvz; //helps determine amount of energy being exchanged during collision
+                		inOut = dx * dvx + dy * dvy + dz * dvz; //helps determine amount of energy being exchanged during collision
                 		float restitutionCoefficient = 0.2; // value for inelastic collision
 
-                		if (dotProduct > 0)
+                		if (inOut > 0)
                 		{
-                    			float collisionMagnitude = (1 + restitutionCoefficient) * dotProduct / (1 / SphereMass + 1 / SphereMass); //calculates the magnitude of the force adjustment due to the collision and takes into account how much kinetic energy is lost in an inelastic collision.
+                    			float collisionMagnitude = (1 + restitutionCoefficient) * inOut / (1 / SphereMass + 1 / SphereMass); //calculates the magnitude of the force adjustment due to the collision and takes into account how much kinetic energy is lost in an inelastic collision.
 
                     			Force[i].x -= collisionMagnitude * (dx / d);
                     			Force[i].y -= collisionMagnitude * (dy / d);
