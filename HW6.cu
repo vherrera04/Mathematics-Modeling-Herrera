@@ -121,25 +121,25 @@ void KeyPressed(unsigned char key, int x, int y)
 
 	if(key == 'a') // Move left
    	 {
-        	glTranslatef(-dx, 0.0, 0.0);
+        	glTranslatef(dx, 0.0, 0.0);
         	drawPicture();
     	}
 
     	if(key == 'd') // Move right
     	{
-        	glTranslatef(dx, 0.0, 0.0);
+        	glTranslatef(-dx, 0.0, 0.0);
         	drawPicture();
     	}
 
     	if(key == 'w') // Move up
     	{
-        	glTranslatef(0.0, dy, 0.0);
+        	glTranslatef(0.0, -dy, 0.0);
         	drawPicture();
     	}
 
     	if(key == 's') // Move down
     	{
-        	glTranslatef(0.0, -dy, 0.0);
+        	glTranslatef(0.0, dy, 0.0);
         	drawPicture();
     	}
     
