@@ -58,7 +58,7 @@ void Display();
 void idle();
 void reshape(int, int);
 void KeyPressed(unsigned char, int, int);
-void setInitialConditions();
+void setInitailConditions();
 void drawPicture();
 void getForces();
 void updatePositions();
@@ -151,7 +151,7 @@ void KeyPressed(unsigned char key, int x, int y)
 	}
 }
 
-void setInitialConditions()
+void setInitailConditions()
 {
 	time_t t;
 	float randomNumber;
@@ -337,7 +337,7 @@ void getForces()
 	float wallStiffnessOut = 8000.0;
 	float kWall;
 	float halfSide = BoxSideLength/2.0;
-	float amiuntOut; */
+	float amountOut; */
 	
 	// ????????????????????????????????????????????
 	// These are a new variable you will use when making the asteroids collide inelastically. 
@@ -366,47 +366,47 @@ void getForces()
 		// Take them out of the box and let them run free, as they were meant to live!
 		/* if((Position[i].x - sphereRadius) < -halfSide)
 		{
-			amiuntOut = -halfSide - (Position[i].x - sphereRadius);
+			amountOut = -halfSide - (Position[i].x - sphereRadius);
 			if(Velocity[i].x < 0.0) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].x += kWall*amiuntOut;
+			Force[i].x += kWall*amountOut;
 		}
 		else if(halfSide < (Position[i].x + sphereRadius))
 		{
-			amiuntOut = (Position[i].x + sphereRadius) - halfSide;
+			amountOut = (Position[i].x + sphereRadius) - halfSide;
 			if(0.0 < Velocity[i].x) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].x -= kWall*amiuntOut;
+			Force[i].x -= kWall*amountOut;
 		}
 		
 		if((Position[i].y - sphereRadius) < -halfSide)
 		{
-			amiuntOut = -halfSide - (Position[i].y - sphereRadius);
+			amountOut = -halfSide - (Position[i].y - sphereRadius);
 			if(Velocity[i].y < 0.0) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].y += kWall*amiuntOut;
+			Force[i].y += kWall*amountOut;
 		}
 		else if(halfSide < (Position[i].y + sphereRadius))
 		{
-			amiuntOut = (Position[i].y + sphereRadius) - halfSide;
+			amountOut = (Position[i].y + sphereRadius) - halfSide;
 			if(0.0 < Velocity[i].y) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].y -= kWall*amiuntOut;
+			Force[i].y -= kWall*amountOut;
 		}
 		
 		if((Position[i].z - sphereRadius) < -halfSide)
 		{
-			amiuntOut = -halfSide - (Position[i].z - sphereRadius);
+			amountOut = -halfSide - (Position[i].z - sphereRadius);
 			if(Velocity[i].z < 0.0) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].z += kWall*amiuntOut;
+			Force[i].z += kWall*amountOut;
 		}
 		else if(halfSide < (Position[i].z + sphereRadius))
 		{
-			amiuntOut = (Position[i].z + sphereRadius) - halfSide;
+			amountOut = (Position[i].z + sphereRadius) - halfSide;
 			if(0.0 < Velocity[i].z) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].z -= kWall*amiuntOut;
+			Force[i].z -= kWall*amountOut;
 		} */
 		
 		for(int j = 0; j < i; j++)
@@ -543,7 +543,7 @@ void startMeUp()
 	Trace = 0;
 	Pause = 1;
 	PrintCount = 0;
-	setInitialConditions();
+	setInitailConditions();
 	printf("\033[0;31m\n\n The simulation is paused. Type p in the simulation window to start it. \n");
 	printf("\033[0m");
 }
@@ -571,11 +571,11 @@ void terminalPrint()
 	// ????????????????????????????????????????
 	// let people know how to move left, right, up, and down.
 	printf("\n");
-	printf("\n Z/z: Move in move out");
-	printf("\n A/a: Move left");
-    	printf("\n D/d: Move right");
-    	printf("\n W/w: Move up");
-    	printf("\n S/s: Move down");
+	printf("\n Z/z: Move in/move out");
+	printf("\n a: Move left");
+    	printf("\n d: Move right");
+    	printf("\n w: Move up");
+    	printf("\n s: Move down");
 	
 	printf("\033[0m");
 	printf("\n t: Trace on/off toggle --> ");
