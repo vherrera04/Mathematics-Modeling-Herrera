@@ -185,10 +185,10 @@ void setInitialConditions()
 	// All spheres are the same diameter and mass of Ceres so these should be 1..
 	SphereDiameter = 1.0;
 	SphereMass = 1.0;
-	sphereRadius = SphereDiameter/2.0;
+	//sphereRadius = SphereDiameter/2.0;
 	
 	// You get to pick this but it is nice to print it out in common units to get a feel for what it is.
-	MaxVelocity = 20.0;
+	MaxVelocity = 10.0;
 	printf("\n Max velocity = %f kilometers/hour or %f miles/hour", MaxVelocity*LengthUnitConverter/TimeUnitConverter, (MaxVelocity*LengthUnitConverter/TimeUnitConverter)*0.621371);
 	
 	// ??????????????????????????????????????????????????
