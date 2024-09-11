@@ -58,7 +58,7 @@ void Display();
 void idle();
 void reshape(int, int);
 void KeyPressed(unsigned char, int, int);
-void setInitailConditions();
+void setInitialConditions();
 void drawPicture();
 void getForces();
 void updatePositions();
@@ -102,8 +102,8 @@ void KeyPressed(unsigned char key, int x, int y)
 	
 	// ?????????????????????????????????????????????????????????????
 	// Add left, right, up, and down functionality to your simulation.
-	float dz = 0.05f;
-    	float dx = 0.05f;
+	float dx = 0.05f;
+    	float dy = 0.05f;
 	float dz = 0.05f;
 
 	if(key == 'z')
@@ -151,7 +151,7 @@ void KeyPressed(unsigned char key, int x, int y)
 	}
 }
 
-void setInitailConditions()
+void setInitialConditions()
 {
 	time_t t;
 	float randomNumber;
@@ -543,7 +543,7 @@ void startMeUp()
 	Trace = 0;
 	Pause = 1;
 	PrintCount = 0;
-	setInitailConditions();
+	setInitialConditions();
 	printf("\033[0;31m\n\n The simulation is paused. Type p in the simulation window to start it. \n");
 	printf("\033[0m");
 }
