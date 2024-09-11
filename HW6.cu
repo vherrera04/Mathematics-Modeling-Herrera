@@ -103,18 +103,46 @@ void KeyPressed(unsigned char key, int x, int y)
 	// ?????????????????????????????????????????????????????????????
 	// Add left, right, up, and down functionality to your simulation.
 	float dz = 0.05f;
+    	float dx = 0.05f;
+	float dz = 0.05f;
+
 	if(key == 'z')
 	{
 		glTranslatef(0.0, 0.0, -dz);
 		drawPicture();
 		terminalPrint();
 	}
+
 	if(key == 'Z')
 	{
 		glTranslatef(0.0, 0.0, dz);
 		drawPicture();
 	}
-	
+
+	if(key == 'a') // Move left
+   	 {
+        	glTranslatef(-dx, 0.0, 0.0);
+        	drawPicture();
+    	}
+
+    	if(key == 'd') // Move right
+    	{
+        	glTranslatef(dx, 0.0, 0.0);
+        	drawPicture();
+    	}
+
+    	if(key == 'w') // Move up
+    	{
+        	glTranslatef(0.0, dy, 0.0);
+        	drawPicture();
+    	}
+
+    	if(key == 's') // Move down
+    	{
+        	glTranslatef(0.0, -dy, 0.0);
+        	drawPicture();
+    	}
+    
 	if(key == 'q')
 	{
 		glutDestroyWindow(Window);
@@ -174,22 +202,32 @@ void setInitailConditions()
 	// You will be initially putting the asteroids inside a big sphere 
 	// so you will need a local variable call it maxSphereSize and two other local variables
 	// call them angle1 and angle2.
+	float maxSphereSize = 5.0; // Size of the sphere within which particles will be placed
+    	float angle1, angle2;
 	
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{
-		// Settting the balls randomly in a large sphere and not letting them be right on top of each other.
+		// Setting the balls randomly in a large sphere and not letting them be right on top of each other.
 		test = 0;
 		while(test == 0)
 		{
 			// ?????????????????????????????????????????????
 			// Change this from a box to a sphere.
 			// Get random position.
-			randomNumber = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*(halfBoxSideLength - sphereRadius);
+			/* randomNumber = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*(halfBoxSideLength - sphereRadius);
 			Position[i].x = randomNumber;
 			randomNumber = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*(halfBoxSideLength - sphereRadius);
 			Position[i].y = randomNumber;
 			randomNumber = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*(halfBoxSideLength - sphereRadius);
-			Position[i].z = randomNumber;
+			Position[i].z = randomNumber; */
+
+			angle1 = ((float)rand() / (float)RAND_MAX) * 2.0f * PI;
+            		angle2 = ((float)rand() / (float)RAND_MAX) * PI;
+            		float r = ((float)rand() / (float)RAND_MAX) * maxSphereSize;
+            
+           		Position[i].x = r * sin(angle2) * cos(angle1);
+            		Position[i].y = r * sin(angle2) * sin(angle1);
+            		Position[i].z = r * cos(angle2);
 			
 			// Making sure the balls centers are at least a diameter apart.
 			// If they are not throw these positions away and try again.
@@ -254,7 +292,7 @@ void drawPicture()
 	
 	// ????????????????????????????????????????????????????????
 	// If the asteroids are not going to live in a box why draw it. 
-	glLineWidth(3.0);
+	/* glLineWidth(3.0);
 	//Drawing front of box
 	glColor3d(0.0, 1.0, 0.0);
 	glBegin(GL_LINE_LOOP);
@@ -286,7 +324,7 @@ void drawPicture()
 		glVertex3f(-halfSide, halfSide, -halfSide);
 		glVertex3f(-halfSide, -halfSide, halfSide);
 		glVertex3f(-halfSide, -halfSide, -halfSide);
-	glEnd();
+	glEnd(); */
 	
 	glutSwapBuffers();
 }
@@ -295,17 +333,17 @@ void getForces()
 {
 	// ????????????????????????????????????????????
 	// We aren't going to have walls in our new world so you will not need these.
-	float wallStiffnessIn = 10000.0;
+	/* float wallStiffnessIn = 10000.0;
 	float wallStiffnessOut = 8000.0;
 	float kWall;
 	float halfSide = BoxSideLength/2.0;
-	float amiuntOut;
+	float amiuntOut; */
 	
 	// ????????????????????????????????????????????
 	// These are a new variable you will use when making the asteroids collide inelastically. 
-	// float inOut;
-	// float kSphereReduction;
-	// float dvx, dvy, dvz;
+	float inOut;
+	float kSphereReduction;
+	float dvx, dvy, dvz;
 	
 	float kSphere;
 	float sphereRadius = SphereDiameter/2.0;
@@ -326,7 +364,7 @@ void getForces()
 		// ???????????????????????????????????????????????????????????????????
 		// Asteroids are free spirits. You can't keep them in a box. 
 		// Take them out of the box and let them run free, as they were meant to live!
-		if((Position[i].x - sphereRadius) < -halfSide)
+		/* if((Position[i].x - sphereRadius) < -halfSide)
 		{
 			amiuntOut = -halfSide - (Position[i].x - sphereRadius);
 			if(Velocity[i].x < 0.0) kWall = wallStiffnessIn;
@@ -369,7 +407,7 @@ void getForces()
 			if(0.0 < Velocity[i].z) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
 			Force[i].z -= kWall*amiuntOut;
-		}
+		} */
 		
 		for(int j = 0; j < i; j++)
 		{
@@ -389,11 +427,11 @@ void getForces()
 			{
 				// ?????????????????
 				// I did the radius check for you.
-				//if(d < sphereRadius)
-				//{
-					//printf("\n Spheres %d and %d got to close. Make your sphere repultion stronger\n", i, j);
-					//exit(0);
-				//}
+				if(d < sphereRadius)
+				{
+					printf("\n Spheres %d and %d got to close. Make your sphere repultion stronger\n", i, j);
+					exit(0);
+				}
 				magnitude = kSphere*(SphereDiameter - d);
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*(dx/d);
@@ -403,6 +441,26 @@ void getForces()
 				Force[j].x += magnitude*(dx/d);
 				Force[j].y += magnitude*(dy/d);
 				Force[j].z += magnitude*(dz/d);
+
+				dvx = Velocity[j].x - Velocity[i].x;
+                		dvy = Velocity[j].y - Velocity[i].y;
+                		dvz = Velocity[j].z - Velocity[i].z;
+                
+                		float dotProduct = dx * dvx + dy * dvy + dz * dvz;
+                		float coefficientOfRestitution = 0.2; // Example value for inelastic collision
+
+                		if (dotProduct > 0)
+                		{
+                    			float collisionMagnitude = (1 + coefficientOfRestitution) * dotProduct / (1 / SphereMass + 1 / SphereMass);
+
+                    			Force[i].x -= collisionMagnitude * (dx / d);
+                    			Force[i].y -= collisionMagnitude * (dy / d);
+                    			Force[i].z -= collisionMagnitude * (dz / d);
+
+                    			Force[j].x += collisionMagnitude * (dx / d);
+                    			Force[j].y += collisionMagnitude * (dy / d);
+                    			Force[j].z += collisionMagnitude * (dz / d);
+				}
 			}
 			
 			// This adds the gravity between asteroids.
@@ -514,6 +572,10 @@ void terminalPrint()
 	// let people know how to move left, right, up, and down.
 	printf("\n");
 	printf("\n Z/z: Move in move out");
+	printf("\n A/a: Move left");
+    	printf("\n D/d: Move right");
+    	printf("\n W/w: Move up");
+    	printf("\n S/s: Move down");
 	
 	printf("\033[0m");
 	printf("\n t: Trace on/off toggle --> ");
