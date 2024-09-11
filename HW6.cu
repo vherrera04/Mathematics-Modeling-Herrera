@@ -359,6 +359,7 @@ void getForces()
 	}
 	
 	kSphere = 1000.0;
+	kSphereReduction = 0.5; // Example value for inelastic collision reduction
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{	
 		// ???????????????????????????????????????????????????????????????????
@@ -432,7 +433,11 @@ void getForces()
 					printf("\n Spheres %d and %d got to close. Make your sphere repultion stronger\n", i, j);
 					exit(0);
 				}
-				magnitude = kSphere*(SphereDiameter - d);
+
+				inOut = SphereDiameter - d;
+
+ 				// Compute repulsive force magnitude with reduction for inelastic collisions
+				magnitude = kSphere*inOut*kSphereReduction;
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*(dx/d);
 				Force[i].y -= magnitude*(dy/d);
@@ -442,6 +447,7 @@ void getForces()
 				Force[j].y += magnitude*(dy/d);
 				Force[j].z += magnitude*(dz/d);
 
+				//Relative Velocity
 				dvx = Velocity[j].x - Velocity[i].x;
                 		dvy = Velocity[j].y - Velocity[i].y;
                 		dvz = Velocity[j].z - Velocity[i].z;
