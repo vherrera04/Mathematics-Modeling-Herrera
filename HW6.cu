@@ -58,7 +58,7 @@ void Display();
 void idle();
 void reshape(int, int);
 void KeyPressed(unsigned char, int, int);
-void setInitailConditions();
+void setInitialConditions();
 void drawPicture();
 void getForces();
 void updatePositions();
@@ -151,12 +151,12 @@ void KeyPressed(unsigned char key, int x, int y)
 	}
 }
 
-void setInitailConditions()
+void setInitialConditions()
 {
 	time_t t;
 	float randomNumber;
-	float halfBoxSideLength;
-	float sphereRadius;
+	//float halfBoxSideLength;
+	//sxfloat sphereRadius;
 	float seperation;
 	int test;
 	
@@ -189,20 +189,20 @@ void setInitailConditions()
 	sphereRadius = SphereDiameter/2.0;
 	
 	// You get to pick this but it is nice to print it out in common units to get a feel for what it is.
-	MaxVelocity = 1.0;
+	MaxVelocity = 20.0;
 	printf("\n Max velocity = %f kilometers/hour or %f miles/hour", MaxVelocity*LengthUnitConverter/TimeUnitConverter, (MaxVelocity*LengthUnitConverter/TimeUnitConverter)*0.621371);
 	
 	// ??????????????????????????????????????????????????
 	// Take the asteroids out of the box so you will not need these. Also remove them from the set of global and local variables 
-	BoxSideLength = 10.0;
+	/*BoxSideLength = 10.0;
 	halfBoxSideLength = BoxSideLength/2.0;
-	printf("\n Box side length = %f kilometers", BoxSideLength*LengthUnitConverter);
+	printf("\n Box side length = %f kilometers", BoxSideLength*LengthUnitConverter); */
 	
 	// ??????????????????????????????????????????????????
 	// You will be initially putting the asteroids inside a big sphere 
 	// so you will need a local variable call it maxSphereSize and two other local variables
 	// call them angle1 and angle2.
-	float maxSphereSize = 5.0; // Size of the sphere within which particles will be placed
+	float maxSphereSize = 10.0; // Size of the sphere within which particles will be placed
     	float angle1, angle2;
 	
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
@@ -549,7 +549,7 @@ void startMeUp()
 	Trace = 0;
 	Pause = 1;
 	PrintCount = 0;
-	setInitailConditions();
+	setInitialConditions();
 	printf("\033[0;31m\n\n The simulation is paused. Type p in the simulation window to start it. \n");
 	printf("\033[0m");
 }
