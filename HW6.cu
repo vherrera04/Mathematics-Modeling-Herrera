@@ -155,8 +155,7 @@ void setInitialConditions()
 {
 	time_t t;
 	float randomNumber;
-	//float halfBoxSideLength;
-	//sxfloat sphereRadius;
+	//float sphereRadius;
 	float seperation;
 	int test;
 	
@@ -194,11 +193,7 @@ void setInitialConditions()
 	
 	// ??????????????????????????????????????????????????
 	// Take the asteroids out of the box so you will not need these. Also remove them from the set of global and local variables 
-	/*BoxSideLength = 10.0;
-	halfBoxSideLength = BoxSideLength/2.0;
-	printf("\n Box side length = %f kilometers", BoxSideLength*LengthUnitConverter); */
 	
-	// ??????????????????????????????????????????????????
 	// You will be initially putting the asteroids inside a big sphere 
 	// so you will need a local variable call it maxSphereSize and two other local variables
 	// call them angle1 and angle2.
@@ -214,12 +209,6 @@ void setInitialConditions()
 			// ?????????????????????????????????????????????
 			// Change this from a box to a sphere.
 			// Get random position.
-			/* randomNumber = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*(halfBoxSideLength - sphereRadius);
-			Position[i].x = randomNumber;
-			randomNumber = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*(halfBoxSideLength - sphereRadius);
-			Position[i].y = randomNumber;
-			randomNumber = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*(halfBoxSideLength - sphereRadius);
-			Position[i].z = randomNumber; */
 
 			angle1 = ((float)rand() / (float)RAND_MAX) * 2.0f * PI;
             		angle2 = ((float)rand() / (float)RAND_MAX) * PI;
@@ -292,39 +281,6 @@ void drawPicture()
 	
 	// ????????????????????????????????????????????????????????
 	// If the asteroids are not going to live in a box why draw it. 
-	/* glLineWidth(3.0);
-	//Drawing front of box
-	glColor3d(0.0, 1.0, 0.0);
-	glBegin(GL_LINE_LOOP);
-		glVertex3f(-halfSide, -halfSide, halfSide);
-		glVertex3f(halfSide, -halfSide, halfSide);
-		glVertex3f(halfSide, halfSide, halfSide);
-		glVertex3f(-halfSide, halfSide, halfSide);
-		glVertex3f(-halfSide, -halfSide, halfSide);
-	glEnd();
-	//Drawing back of box
-	glColor3d(1.0, 1.0, 1.0);
-	glBegin(GL_LINE_LOOP);
-		glVertex3f(-halfSide, -halfSide, -halfSide);
-		glVertex3f(halfSide, -halfSide, -halfSide);
-		glVertex3f(halfSide, halfSide, -halfSide);
-		glVertex3f(-halfSide, halfSide, -halfSide);
-		glVertex3f(-halfSide, -halfSide, -halfSide);
-	glEnd();
-	// Finishing off right side
-	glBegin(GL_LINES);
-		glVertex3f(halfSide, halfSide, halfSide);
-		glVertex3f(halfSide, halfSide, -halfSide);
-		glVertex3f(halfSide, -halfSide, halfSide);
-		glVertex3f(halfSide, -halfSide, -halfSide);
-	glEnd();
-	// Finishing off left side
-	glBegin(GL_LINES);
-		glVertex3f(-halfSide, halfSide, halfSide);
-		glVertex3f(-halfSide, halfSide, -halfSide);
-		glVertex3f(-halfSide, -halfSide, halfSide);
-		glVertex3f(-halfSide, -halfSide, -halfSide);
-	glEnd(); */
 	
 	glutSwapBuffers();
 }
@@ -333,11 +289,7 @@ void getForces()
 {
 	// ????????????????????????????????????????????
 	// We aren't going to have walls in our new world so you will not need these.
-	/* float wallStiffnessIn = 10000.0;
-	float wallStiffnessOut = 8000.0;
-	float kWall;
-	float halfSide = BoxSideLength/2.0;
-	float amountOut; */
+	
 	
 	// ????????????????????????????????????????????
 	// These are a new variable you will use when making the asteroids collide inelastically. 
@@ -365,50 +317,7 @@ void getForces()
 		// ???????????????????????????????????????????????????????????????????
 		// Asteroids are free spirits. You can't keep them in a box. 
 		// Take them out of the box and let them run free, as they were meant to live!
-		/* if((Position[i].x - sphereRadius) < -halfSide)
-		{
-			amountOut = -halfSide - (Position[i].x - sphereRadius);
-			if(Velocity[i].x < 0.0) kWall = wallStiffnessIn;
-			else kWall = wallStiffnessOut;
-			Force[i].x += kWall*amountOut;
-		}
-		else if(halfSide < (Position[i].x + sphereRadius))
-		{
-			amountOut = (Position[i].x + sphereRadius) - halfSide;
-			if(0.0 < Velocity[i].x) kWall = wallStiffnessIn;
-			else kWall = wallStiffnessOut;
-			Force[i].x -= kWall*amountOut;
-		}
 		
-		if((Position[i].y - sphereRadius) < -halfSide)
-		{
-			amountOut = -halfSide - (Position[i].y - sphereRadius);
-			if(Velocity[i].y < 0.0) kWall = wallStiffnessIn;
-			else kWall = wallStiffnessOut;
-			Force[i].y += kWall*amountOut;
-		}
-		else if(halfSide < (Position[i].y + sphereRadius))
-		{
-			amountOut = (Position[i].y + sphereRadius) - halfSide;
-			if(0.0 < Velocity[i].y) kWall = wallStiffnessIn;
-			else kWall = wallStiffnessOut;
-			Force[i].y -= kWall*amountOut;
-		}
-		
-		if((Position[i].z - sphereRadius) < -halfSide)
-		{
-			amountOut = -halfSide - (Position[i].z - sphereRadius);
-			if(Velocity[i].z < 0.0) kWall = wallStiffnessIn;
-			else kWall = wallStiffnessOut;
-			Force[i].z += kWall*amountOut;
-		}
-		else if(halfSide < (Position[i].z + sphereRadius))
-		{
-			amountOut = (Position[i].z + sphereRadius) - halfSide;
-			if(0.0 < Velocity[i].z) kWall = wallStiffnessIn;
-			else kWall = wallStiffnessOut;
-			Force[i].z -= kWall*amountOut;
-		} */
 		
 		for(int j = 0; j < i; j++)
 		{
@@ -434,7 +343,7 @@ void getForces()
 					exit(0);
 				}
 
-				inOut = SphereDiameter - d;
+				inOut = SphereDiameter - d; //calculates the overlap between two spheres
 
  				// Compute repulsive force magnitude with reduction for inelastic collisions
 				magnitude = kSphere*inOut*kSphereReduction;
@@ -452,12 +361,12 @@ void getForces()
                 		dvy = Velocity[j].y - Velocity[i].y;
                 		dvz = Velocity[j].z - Velocity[i].z;
                 
-                		float dotProduct = dx * dvx + dy * dvy + dz * dvz;
-                		float coefficientOfRestitution = 0.2; // Example value for inelastic collision
+                		float dotProduct = dx * dvx + dy * dvy + dz * dvz; //helps determine amount of energy being exchanged during collision
+                		float restitutionCoefficient = 0.2; // value for inelastic collision
 
                 		if (dotProduct > 0)
                 		{
-                    			float collisionMagnitude = (1 + coefficientOfRestitution) * dotProduct / (1 / SphereMass + 1 / SphereMass);
+                    			float collisionMagnitude = (1 + restitutionCoefficient) * dotProduct / (1 / SphereMass + 1 / SphereMass); //calculates the magnitude of the force adjustment due to the collision and takes into account how much kinetic energy is lost in an inelastic collision.
 
                     			Force[i].x -= collisionMagnitude * (dx / d);
                     			Force[i].y -= collisionMagnitude * (dy / d);
