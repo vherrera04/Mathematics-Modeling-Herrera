@@ -362,15 +362,15 @@ void getForces()
 
                 		if (inOut > 0)
                 		{
-                    			float collisionMagnitude = (1 + restitutionCoefficient) * inOut / (1 / SphereMass + 1 / SphereMass); //calculates the magnitude of the force adjustment due to the collision and takes into account how much kinetic energy is lost in an inelastic collision.
+                    			float forceAdjustment = (1 + restitutionCoefficient) * inOut / (1 / SphereMass + 1 / SphereMass); //calculates the magnitude of the force adjustment due to the collision and takes into account how much kinetic energy is lost in an inelastic collision.
 
-                    			Force[i].x -= collisionMagnitude * (dx / d);
-                    			Force[i].y -= collisionMagnitude * (dy / d);
-                    			Force[i].z -= collisionMagnitude * (dz / d);
+                    			Force[i].x -= forceAdjustment * (dx / d);
+                    			Force[i].y -= forceAdjustment * (dy / d);
+                    			Force[i].z -= forceAdjustment * (dz / d);
 
-                    			Force[j].x += collisionMagnitude * (dx / d);
-                    			Force[j].y += collisionMagnitude * (dy / d);
-                    			Force[j].z += collisionMagnitude * (dz / d);
+                    			Force[j].x += forceAdjustment * (dx / d);
+                    			Force[j].y += forceAdjustment * (dy / d);
+                    			Force[j].z += forceAdjustment * (dz / d);
 				}
 			}
 			
