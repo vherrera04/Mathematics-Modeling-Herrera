@@ -155,7 +155,6 @@ void setInitialConditions()
 {
 	time_t t;
 	float randomNumber;
-	//float sphereRadius;
 	float seperation;
 	int test;
 	
@@ -169,7 +168,7 @@ void setInitialConditions()
 	// If you multiply one of our units by this number it will convert it the outside world units.
 	// If you divide an outside world unit by this number it will convert it to our units
 	// We are setting the mass unit to be the mass of Ceres.
-	// We are setting the length unit to be th diameter of Ceres.
+	// We are settting the length unit to be th diameter of Ceres.
 	// We are setting the time unit to be the such that the universal gravity constant is 1.
 	MassUnitConverter = 9.383e20; // kg
 	LengthUnitConverter = 940.0; // km
@@ -182,13 +181,12 @@ void setInitialConditions()
 	GravityConstant = 1.0;
 	printf("\n The gravity constant = %f in our units", GravityConstant);
 	
-	// All spheres are the same diameter and mass of Ceres so these should be 1.
+	// All spheres are the same diameter and mass of Ceres so these should be 1..
 	SphereDiameter = 1.0;
 	SphereMass = 1.0;
-	//sphereRadius = SphereDiameter/2.0;
 	
 	// You get to pick this but it is nice to print it out in common units to get a feel for what it is.
-	MaxVelocity = 5.0;
+	MaxVelocity = 1.0;
 	printf("\n Max velocity = %f kilometers/hour or %f miles/hour", MaxVelocity*LengthUnitConverter/TimeUnitConverter, (MaxVelocity*LengthUnitConverter/TimeUnitConverter)*0.621371);
 	
 	// ??????????????????????????????????????????????????
@@ -197,7 +195,7 @@ void setInitialConditions()
 	// You will be initially putting the asteroids inside a big sphere 
 	// so you will need a local variable call it maxSphereSize and two other local variables
 	// call them angle1 and angle2.
-	float maxSphereSize = 10.0; // Size of the sphere within which particles will be placed
+	float maxSphereSize = 5.0; // Size of the sphere within which particles will be placed
     	float angle1, angle2;
 	
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
@@ -255,7 +253,7 @@ void setInitialConditions()
 	TotalRunTime = 10.0*24.0/TimeUnitConverter;
 	RunTime = 0.0;
 	Dt = 0.001;
-	// How many time steps between terminal prints
+	// How many time steps between termenal prints
 	PrintRate = 10;
 }
 
@@ -311,12 +309,13 @@ void getForces()
 	}
 	
 	kSphere = 1000.0;
-	kSphereReduction = 0.5; // value for inelastic collision reduction
+	kSphereReduction = 0.25; // value for inelastic collision reduction
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{	
 		// ???????????????????????????????????????????????????????????????????
 		// Asteroids are free spirits. You can't keep them in a box. 
 		// Take them out of the box and let them run free, as they were meant to live!
+		
 		
 		for(int j = 0; j < i; j++)
 		{
@@ -341,8 +340,15 @@ void getForces()
 					printf("\n Spheres %d and %d got to close. Make your sphere repultion stronger\n", i, j);
 					exit(0);
 				}
-
-				magnitude = kSphere*(SphereDiameter - d)*kSphereReduction;
+				//Relative Velocity
+				dvx = Velocity[j].x - Velocity[i].x;
+                		dvy = Velocity[j].y - Velocity[i].y;
+                		dvz = Velocity[j].z - Velocity[i].z;
+                
+                		inOut = dx * dvx + dy * dvy + dz * dvz; //helps determine amount of energy being exchanged during collision
+                		// Compute repulsive force magnitude with reduction for inelastic collisions
+                		magnitude = kSphere*(SphereDiameter - d);
+                		if (inOut > 0.0) magnitude = kSphereReduction * magnitude;
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*(dx/d);
 				Force[i].y -= magnitude*(dy/d);
@@ -351,27 +357,7 @@ void getForces()
 				Force[j].x += magnitude*(dx/d);
 				Force[j].y += magnitude*(dy/d);
 				Force[j].z += magnitude*(dz/d);
-
-				//Relative Velocity
-				dvx = Velocity[j].x - Velocity[i].x;
-                		dvy = Velocity[j].y - Velocity[i].y;
-                		dvz = Velocity[j].z - Velocity[i].z;
-                
-                		inOut = dx * dvx + dy * dvy + dz * dvz; //helps determine amount of energy being exchanged during collision
-                		float restitutionCoefficient = 0.2; // value for inelastic collision
-
-                		if (inOut > 0)
-                		{
-                    			float forceAdjustment = (1 + restitutionCoefficient) * inOut / (1 / SphereMass + 1 / SphereMass); //calculates the magnitude of the force adjustment due to the collision and takes into account how much kinetic energy is lost in an inelastic collision.
-
-                    			Force[i].x -= forceAdjustment * (dx / d);
-                    			Force[i].y -= forceAdjustment * (dy / d);
-                    			Force[i].z -= forceAdjustment * (dz / d);
-
-                    			Force[j].x += forceAdjustment * (dx / d);
-                    			Force[j].y += forceAdjustment * (dy / d);
-                    			Force[j].z += forceAdjustment * (dz / d);
-				}
+				
 			}
 			
 			// This adds the gravity between asteroids.
