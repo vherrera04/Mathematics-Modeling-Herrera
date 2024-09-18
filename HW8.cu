@@ -25,6 +25,7 @@ float4 Position[NUMBER_OF_BALLS], Velocity[NUMBER_OF_BALLS], Force[NUMBER_OF_BAL
 float SphereMass;
 float SphereDiameter;
 float MaxVelocity;
+float BoxSideLength;
 int Trace;
 int Pause;
 int PrintRate;
