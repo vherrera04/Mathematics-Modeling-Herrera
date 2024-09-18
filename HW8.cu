@@ -197,6 +197,7 @@ void setInitailConditions()
 	time_t t;
 	float seperation;
 	int test;
+	BoxSideLength = 10.0;
 	float maxSphereSize, angle1, angle2, radius;
 	
 	// Seeding the random number generater.
