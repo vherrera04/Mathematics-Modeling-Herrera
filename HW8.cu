@@ -25,7 +25,7 @@ float4 Position[NUMBER_OF_BALLS], Velocity[NUMBER_OF_BALLS], Force[NUMBER_OF_BAL
 float SphereMass;
 float SphereDiameter;
 float MaxVelocity;
-float BoxSideLength;
+//float BoxSideLength;
 int Trace;
 int Pause;
 int PrintRate;
@@ -197,7 +197,6 @@ void setInitailConditions()
 	time_t t;
 	float seperation;
 	int test;
-	BoxSideLength = 10.0;
 	float maxSphereSize, angle1, angle2, radius;
 	
 	// Seeding the random number generater.
@@ -284,6 +283,7 @@ void setInitailConditions()
 	Dt = 0.001;
 	// How many time steps between termenal prints
 	PrintRate = 10;
+	//BoxSideLength = 10.0;
 }
 
 void drawPicture()
@@ -306,25 +306,24 @@ void drawPicture()
 	
 	// ???????????????????????????????????????????????
 	// Draw a cool 10X10 wall centered at (25,0,0) perpendicular to the x axis.
-	float halfSide = BoxSideLength/2.0;
+	//float halfSide = BoxSideLength/2.0;
 
-	glLineWidth(3.0);
+	/* glLineWidth(3.0);
 	//Drawing front of box
 	glColor3d(0.0, 1.0, 0.0);
-	glBegin(GL_LINE_LOOP);
-		glVertex3f(-halfSide, -halfSide, halfSide);
-		glVertex3f(halfSide, -halfSide, halfSide);
+	glBegin(GL_LINES);
 		glVertex3f(halfSide, halfSide, halfSide);
-		glVertex3f(-halfSide, halfSide, halfSide);
-		glVertex3f(-halfSide, -halfSide, halfSide);
-	glEnd();
+		glVertex3f(halfSide, halfSide, -halfSide);
+		glVertex3f(halfSide, -halfSide, halfSide);
+		glVertex3f(halfSide, -halfSide, -halfSide);
+	glEnd(); */
 	
-	/* glColor3f(1.0f, 1.0f, 1.0f); // Set color to white
+	 glColor3f(1.0f, 0.5f, 0.5f); // Set color to white
 	glPushMatrix();
 		glTranslatef(25.0f, 0.0f, 0.0f); // Move to the center of the wall
 		glBegin(GL_QUADS);
 
-		// Front face
+		/* // Front face
 		glVertex3f(-5.0f, -5.0f, 0.0f);
 		glVertex3f(5.0f, -5.0f, 0.0f);
 		glVertex3f(5.0f, 5.0f, 0.0f);
@@ -346,7 +345,7 @@ void drawPicture()
 		glVertex3f(-5.0f, -5.0f, 0.0f);
 		glVertex3f(5.0f, -5.0f, 0.0f);
 		glVertex3f(5.0f, -5.0f, -0.1f);
-		glVertex3f(-5.0f, -5.0f, -0.1f);
+		glVertex3f(-5.0f, -5.0f, -0.1f); */
 
 		// Right face
 		glVertex3f(5.0f, -5.0f, 0.0f);
@@ -354,14 +353,14 @@ void drawPicture()
 		glVertex3f(5.0f, 5.0f, -0.1f);
 		glVertex3f(5.0f, -5.0f, -0.1f);
 
-		// Left face
+		/* //Left face
 		glVertex3f(-5.0f, -5.0f, 0.0f);
 		glVertex3f(-5.0f, 5.0f, 0.0f);
 		glVertex3f(-5.0f, 5.0f, -0.1f);
-		glVertex3f(-5.0f, -5.0f, -0.1f);
+		glVertex3f(-5.0f, -5.0f, -0.1f); */
 
 		glEnd();
-	glPopMatrix(); */
+	glPopMatrix(); 
 
 	glutSwapBuffers();
 }
