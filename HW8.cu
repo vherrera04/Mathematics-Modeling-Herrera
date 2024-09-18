@@ -88,6 +88,18 @@ void KeyPressed(unsigned char key, int x, int y)
 	{
 		float4 pos, vel;
 		Pause = 1;
+
+		// Compute center of mass and linear velocity
+        	pos = centerOfMass();
+        	vel = linearVelocity();
+        
+        	// Zero out positions and velocities
+        	for (int i = 0; i < NUMBER_OF_BALLS; i++)
+        	{
+           	Position[i] = pos; // Set all positions to the center of mass
+            	Velocity[i] = {0.0f, 0.0f, 0.0f, 0.0f}; // Set all velocities to zero
+        	}
+
 		terminalPrint();
 		// ??????????????????????????????????????????
 		// Zero out center of mass and linear velocity of the system.
@@ -99,9 +111,20 @@ void KeyPressed(unsigned char key, int x, int y)
 	{
 		float4 pos, vel;
 		Pause = 1;
-		terminalPrint();
-		// ??????????????????????????????????????????
-		//Print out center of mass and linear velocity of the system.
+		// Compute center of mass and linear velocity
+        	pos = centerOfMass();
+        	vel = linearVelocity();
+        
+        	// Zero out positions and velocities
+        	for (int i = 0; i < NUMBER_OF_BALLS; i++)
+        	{
+            	Position[i] = pos; // Set all positions to the center of mass
+            	Velocity[i] = {0.0f, 0.0f, 0.0f, 0.0f}; // Set all velocities to zero
+        	}
+        
+        	terminalPrint();
+        	drawPicture();
+        	printf("\n The simulation has been zeroed out.\n");
 	}
 	
 	// Turns tracers on and off
@@ -281,7 +304,50 @@ void drawPicture()
 	
 	// ???????????????????????????????????????????????
 	// Draw a cool 10X10 wall centered at (25,0,0) perpendicular to the x axis.
-	
+	glColor3f(1.0f, 1.0f, 1.0f); // Set color to white
+	glPushMatrix();
+		glTranslatef(25.0f, 0.0f, 0.0f); // Move to the center of the wall
+		glBegin(GL_QUADS);
+
+		// Front face
+		glVertex3f(-5.0f, -5.0f, 0.0f);
+		glVertex3f(5.0f, -5.0f, 0.0f);
+		glVertex3f(5.0f, 5.0f, 0.0f);
+		glVertex3f(-5.0f, 5.0f, 0.0f);
+
+		// Back face
+		glVertex3f(-5.0f, -5.0f, -0.1f);
+		glVertex3f(5.0f, -5.0f, -0.1f);
+		glVertex3f(5.0f, 5.0f, -0.1f);
+		glVertex3f(-5.0f, 5.0f, -0.1f);
+
+		// Top face
+		glVertex3f(-5.0f, 5.0f, 0.0f);
+		glVertex3f(5.0f, 5.0f, 0.0f);
+		glVertex3f(5.0f, 5.0f, -0.1f);
+		glVertex3f(-5.0f, 5.0f, -0.1f);
+
+		// Bottom face
+		glVertex3f(-5.0f, -5.0f, 0.0f);
+		glVertex3f(5.0f, -5.0f, 0.0f);
+		glVertex3f(5.0f, -5.0f, -0.1f);
+		glVertex3f(-5.0f, -5.0f, -0.1f);
+
+		// Right face
+		glVertex3f(5.0f, -5.0f, 0.0f);
+		glVertex3f(5.0f, 5.0f, 0.0f);
+		glVertex3f(5.0f, 5.0f, -0.1f);
+		glVertex3f(5.0f, -5.0f, -0.1f);
+
+		// Left face
+		glVertex3f(-5.0f, -5.0f, 0.0f);
+		glVertex3f(-5.0f, 5.0f, 0.0f);
+		glVertex3f(-5.0f, 5.0f, -0.1f);
+		glVertex3f(-5.0f, -5.0f, -0.1f);
+
+		glEnd();
+	glPopMatrix();
+
 	glutSwapBuffers();
 }
 
@@ -296,6 +362,22 @@ float4 centerOfMass()
 	// ????????????????????????????????????????????????????????
 	// Return the center of mass of the system.
 
+	float totalMass = 0.0f;
+
+	for(int i = 0; i < NUMBER_OF_BALLS; i++)
+	{
+		centerOfMass.x += Position[i].x * SphereMass;
+		centerOfMass.y += Position[i].y * SphereMass;
+		centerOfMass.z += Position[i].z * SphereMass;
+		totalMass += SphereMass;
+	}
+
+	if(totalMass > 0.0f)
+	{
+		centerOfMass.x /= totalMass;
+		centerOfMass.y /= totalMass;
+		centerOfMass.z /= totalMass;
+	}
 	
 	return(centerOfMass);
 }
@@ -310,7 +392,23 @@ float4 linearVelocity()
 	
 	// ????????????????????????????????????????????????????????
 	// Return the linear velocity of the system.
-	
+	float totalMass = 0.0f;
+
+	for(int i = 0; i < NUMBER_OF_BALLS; i++)
+	{
+		linearVelocity.x += Velocity[i].x * SphereMass;
+		linearVelocity.y += Velocity[i].y * SphereMass;
+		linearVelocity.z += Velocity[i].z * SphereMass;
+		totalMass += SphereMass;
+	}
+
+	if(totalMass > 0.0f)
+	{
+		linearVelocity.x /= totalMass;
+		linearVelocity.y /= totalMass;
+		linearVelocity.z /= totalMass;
+	}
+
 	return(linearVelocity);
 }
 
