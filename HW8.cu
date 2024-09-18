@@ -304,7 +304,20 @@ void drawPicture()
 	
 	// ???????????????????????????????????????????????
 	// Draw a cool 10X10 wall centered at (25,0,0) perpendicular to the x axis.
-	glColor3f(1.0f, 1.0f, 1.0f); // Set color to white
+	float halfSide = BoxSideLength/2.0;
+
+	glLineWidth(3.0);
+	//Drawing front of box
+	glColor3d(0.0, 1.0, 0.0);
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(-halfSide, -halfSide, halfSide);
+		glVertex3f(halfSide, -halfSide, halfSide);
+		glVertex3f(halfSide, halfSide, halfSide);
+		glVertex3f(-halfSide, halfSide, halfSide);
+		glVertex3f(-halfSide, -halfSide, halfSide);
+	glEnd();
+	
+	/* glColor3f(1.0f, 1.0f, 1.0f); // Set color to white
 	glPushMatrix();
 		glTranslatef(25.0f, 0.0f, 0.0f); // Move to the center of the wall
 		glBegin(GL_QUADS);
@@ -346,7 +359,7 @@ void drawPicture()
 		glVertex3f(-5.0f, -5.0f, -0.1f);
 
 		glEnd();
-	glPopMatrix();
+	glPopMatrix(); */
 
 	glutSwapBuffers();
 }
