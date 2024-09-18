@@ -306,61 +306,15 @@ void drawPicture()
 	
 	// ???????????????????????????????????????????????
 	// Draw a cool 10X10 wall centered at (25,0,0) perpendicular to the x axis.
-	//float halfSide = BoxSideLength/2.0;
+	float halfSide = 10.0;
 
-	/* glLineWidth(3.0);
-	//Drawing front of box
 	glColor3d(0.0, 1.0, 0.0);
-	glBegin(GL_LINES);
-		glVertex3f(halfSide, halfSide, halfSide);
-		glVertex3f(halfSide, halfSide, -halfSide);
-		glVertex3f(halfSide, -halfSide, halfSide);
-		glVertex3f(halfSide, -halfSide, -halfSide);
-	glEnd(); */
-	
-	 glColor3f(1.0f, 0.5f, 0.5f); // Set color to white
-	glPushMatrix();
-		glTranslatef(25.0f, 0.0f, 0.0f); // Move to the center of the wall
-		glBegin(GL_QUADS);
-
-		/* // Front face
-		glVertex3f(-5.0f, -5.0f, 0.0f);
-		glVertex3f(5.0f, -5.0f, 0.0f);
-		glVertex3f(5.0f, 5.0f, 0.0f);
-		glVertex3f(-5.0f, 5.0f, 0.0f);
-
-		// Back face
-		glVertex3f(-5.0f, -5.0f, -0.1f);
-		glVertex3f(5.0f, -5.0f, -0.1f);
-		glVertex3f(5.0f, 5.0f, -0.1f);
-		glVertex3f(-5.0f, 5.0f, -0.1f);
-
-		// Top face
-		glVertex3f(-5.0f, 5.0f, 0.0f);
-		glVertex3f(5.0f, 5.0f, 0.0f);
-		glVertex3f(5.0f, 5.0f, -0.1f);
-		glVertex3f(-5.0f, 5.0f, -0.1f);
-
-		// Bottom face
-		glVertex3f(-5.0f, -5.0f, 0.0f);
-		glVertex3f(5.0f, -5.0f, 0.0f);
-		glVertex3f(5.0f, -5.0f, -0.1f);
-		glVertex3f(-5.0f, -5.0f, -0.1f); */
-
-		// Right face
-		glVertex3f(5.0f, -5.0f, 0.0f);
-		glVertex3f(5.0f, 5.0f, 0.0f);
-		glVertex3f(5.0f, 5.0f, -0.1f);
-		glVertex3f(5.0f, -5.0f, -0.1f);
-
-		/* //Left face
-		glVertex3f(-5.0f, -5.0f, 0.0f);
-		glVertex3f(-5.0f, 5.0f, 0.0f);
-		glVertex3f(-5.0f, 5.0f, -0.1f);
-		glVertex3f(-5.0f, -5.0f, -0.1f); */
-
-		glEnd();
-	glPopMatrix(); 
+	glBegin(GL_QUAD);
+		glVertex3f(25, halfSide, halfSide);
+		glVertex3f(25, halfSide, -halfSide);
+		glVertex3f(25, -halfSide, halfSide);
+		glVertex3f(25, -halfSide, -halfSide);
+	glEnd();
 
 	glutSwapBuffers();
 }
