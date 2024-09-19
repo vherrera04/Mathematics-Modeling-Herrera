@@ -96,13 +96,14 @@ void KeyPressed(unsigned char key, int x, int y)
         	// Zero out positions and velocities
         	for (int i = 0; i < NUMBER_OF_BALLS; i++)
         	{
-           	Position[i] = pos; // Set all positions to the center of mass
-            	Velocity[i] = vel; // Set all velocities to linear velocity
+           		Position[i].x -= pos.x;
+           		Position[i].y -= pos.y;
+           		Position[i].z -= pos.z;
+           		
+           		Velocity[i].x -= vel.x;
+           		Velocity[i].y -= vel.y;
+           		Velocity[i].z -= vel.z;
         	}
-
-		// Assuming you have functions to set the center of mass and velocity
-    		setCenterOfMass({0.0f, 0.0f, 0.0f, 0.0f}); // Reset center of mass
-    		setLinearVelocity({0.0f, 0.0f, 0.0f, 0.0f}); // Reset linear velocity
 
 		terminalPrint();
 		// ??????????????????????????????????????????
@@ -307,11 +308,11 @@ void drawPicture()
 	float halfSide = 10.0;
 
 	glColor3d(0.0, 1.0, 0.0);
-	glBegin(GL_QUAD);
-		glVertex3f(25, halfSide, halfSide);
-		glVertex3f(25, halfSide, -halfSide);
-		glVertex3f(25, -halfSide, halfSide);
+	glBegin(GL_QUADS);
 		glVertex3f(25, -halfSide, -halfSide);
+		glVertex3f(25, halfSide, -halfSide);
+		glVertex3f(25, halfSide, halfSide);
+		glVertex3f(25, -halfSide, halfSide);
 	glEnd();
 
 	glutSwapBuffers();
