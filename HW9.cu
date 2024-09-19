@@ -303,7 +303,17 @@ void drawPicture()
 	}
 	
 	// Drawing the wall.
-	glLineWidth(3.0);
+	float halfSide = 5.0;
+
+	glColor3d(0.0, 1.0, 0.0);
+	glBegin(GL_QUADS);
+		glVertex3f(25, -halfSide, -halfSide);
+		glVertex3f(25, halfSide, -halfSide);
+		glVertex3f(25, halfSide, halfSide);
+		glVertex3f(25, -halfSide, halfSide);
+	glEnd();
+
+	/* glLineWidth(3.0);
 	//Drawing front of box
 	glColor3d(0.0, 1.0, 0.0);
 	glBegin(GL_LINE_LOOP);
@@ -318,7 +328,7 @@ void drawPicture()
 	glPointSize(10.0f);
 	glBegin(GL_POINTS);
 		glVertex3f(25.0f, 0.0f, 0.0f);
-	glEnd();
+	glEnd(); */
 	
 	glutSwapBuffers();
 }
