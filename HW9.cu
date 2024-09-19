@@ -30,7 +30,7 @@ int Pause;
 int PrintRate;
 int PrintCount;
 
-// Units and universal constants
+// Units and universal constantxs
 float MassUnitConverter;
 float LengthUnitConverter;
 float TimeUnitConverter;
@@ -90,7 +90,7 @@ void KeyPressed(unsigned char key, int x, int y)
 	{
 		for (int i = 0; i < NUMBER_OF_BALLS; i++) 
 		{
-            		Velocity[i].x += 10.0; // Propel in the x direction
+            		Velocity[i].x = 10.0; // Propel in the x direction
 		}
 	}
 	
@@ -219,7 +219,7 @@ void setInitialConditions()
 	
 	// If we did everthing right the universal gravity constant should be 1.
 	GravityConstant = 1.0;
-	printf("\n The gavity constant = %f in our units", GravityConstant);
+	printf("\n The gravity constant = %f in our units", GravityConstant);
 	
 	// All spheres are the same diameter and mass of Ceres so these should be 1..
 	SphereDiameter = 1.0;
@@ -305,14 +305,14 @@ void drawPicture()
 	// Drawing the wall.
 	float halfSide = 5.0;
 
-	glColor3d(0.0, 1.0, 0.0);
+	glColor3d(1.0, 0.0, 1.0);
 	glBegin(GL_QUADS);
 		glVertex3f(25, -halfSide, -halfSide);
 		glVertex3f(25, halfSide, -halfSide);
 		glVertex3f(25, halfSide, halfSide);
 		glVertex3f(25, -halfSide, halfSide);
 	glEnd();
-
+	
 	/* glLineWidth(3.0);
 	//Drawing front of box
 	glColor3d(0.0, 1.0, 0.0);
@@ -322,13 +322,13 @@ void drawPicture()
 		glVertex3f(25.0, 5.0, -5.0);
 		glVertex3f(25.0, 5.0, 5.0);
 		glVertex3f(25.0, -5.0, 5.0);
-	glEnd();
+	glEnd(); */
 	
 	glColor3d(1.0, 0.0, 0.0);
 	glPointSize(10.0f);
 	glBegin(GL_POINTS);
 		glVertex3f(25.0f, 0.0f, 0.0f);
-	glEnd(); */
+	glEnd();
 	
 	glutSwapBuffers();
 }
