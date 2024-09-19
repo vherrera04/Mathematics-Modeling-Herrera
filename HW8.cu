@@ -115,20 +115,16 @@ void KeyPressed(unsigned char key, int x, int y)
 	{
 		float4 pos, vel;
 		Pause = 1;
-		// Compute center of mass and linear velocity
-        	pos = centerOfMass();
-        	vel = linearVelocity();
-        
-        	// Zero out positions and velocities
-        	for (int i = 0; i < NUMBER_OF_BALLS; i++)
-        	{
-            	Position[i] = pos; // Set all positions to the center of mass
-            	Velocity[i] = {0.0f, 0.0f, 0.0f, 0.0f}; // Set all velocities to zero
-        	}
-        
+
+		 // Compute the center of mass and linear velocity
+    		pos = centerOfMass();      // Get the center of mass
+    		vel = linearVelocity();     // Get the linear velocity
+
         	terminalPrint();
         	drawPicture();
-        	printf("\n The simulation has been zeroed out.\n");
+        	//Print out center of mass and linear velocity of the system.
+		printf("Center of Mass: (%f, %f, %f, %f)\n", pos.x, pos.y, pos.z, pos.w);
+   	 	printf("Linear Velocity: (%f, %f, %f, %f)\n", vel.x, vel.y, vel.z, vel.w);
 	}
 	
 	// Turns tracers on and off
