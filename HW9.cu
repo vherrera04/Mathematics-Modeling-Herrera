@@ -34,7 +34,7 @@ int PrintCount;
 float MassUnitConverter;
 float LengthUnitConverter;
 float TimeUnitConverter;
-float GavityConstant;
+float GravityConstant;
 
 // Window globals
 static int Window;
@@ -57,7 +57,7 @@ void Display();
 void idle();
 void reshape(int, int);
 void KeyPressed(unsigned char, int, int);
-void setInitailConditions();
+void setInitialConditions();
 void drawPicture();
 float4 centerOfMass();
 float4 linearVelocity();
@@ -86,7 +86,10 @@ void KeyPressed(unsigned char key, int x, int y)
 {
 	// ??????????????????????????????????????????????
 	// Make a key that will propel the asteriod into your wall
-	
+	if(key == 'b')
+	{
+		
+	}
 	
 	if(key == 'k')
 	{
@@ -185,7 +188,7 @@ void KeyPressed(unsigned char key, int x, int y)
 	}
 }
 
-void setInitailConditions()
+void setInitialConditions()
 {
 	time_t t;
 	float seperation;
@@ -212,8 +215,8 @@ void setInitailConditions()
 	printf("\n TimeUnitConverter = %e hours", TimeUnitConverter);
 	
 	// If we did everthing right the universal gravity constant should be 1.
-	GavityConstant = 1.0;
-	printf("\n The gavity constant = %f in our units", GavityConstant);
+	GravityConstant = 1.0;
+	printf("\n The gavity constant = %f in our units", GravityConstant);
 	
 	// All spheres are the same diameter and mass of Ceres so these should be 1..
 	SphereDiameter = 1.0;
@@ -388,7 +391,7 @@ void getForces()
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{	
 		// ?????????????????????????????????????????????????????
-		// Make the asteriods inilastically bounce off the wall.
+		// Make the asteriods inelastically bounce off the wall.
 		
 		
 		
@@ -428,7 +431,7 @@ void getForces()
 				
 				// This adds the gravity between asteroids but the gravity is lock in at what it 
 				// was at impact.
-				magnitude = GavityConstant*SphereMass*SphereMass/(SphereDiameter*SphereDiameter);
+				magnitude = GravityConstant*SphereMass*SphereMass/(SphereDiameter*SphereDiameter);
 				Force[i].x += magnitude*(dx/d);
 				Force[i].y += magnitude*(dy/d);
 				Force[i].z += magnitude*(dz/d);
@@ -440,7 +443,7 @@ void getForces()
 			else
 			{
 				// This adds the gravity between asteroids when they are not touching.
-				magnitude = GavityConstant*SphereMass*SphereMass/(d*d);
+				magnitude = GravityConstant*SphereMass*SphereMass/(d*d);
 				Force[i].x += magnitude*(dx/d);
 				Force[i].y += magnitude*(dy/d);
 				Force[i].z += magnitude*(dz/d);
@@ -507,7 +510,7 @@ void startMeUp()
 	Trace = 0;
 	Pause = 1;
 	PrintCount = 0;
-	setInitailConditions();
+	setInitialConditions();
 	printf("\033[0;31m\n\n The simulation is paused. Type p in the simulation window to start it. \n");
 	printf("\033[0m");
 }
@@ -542,6 +545,7 @@ void terminalPrint()
 	printf("\n 1: Will print the center of mass and the linear velocity of the system.");
 	// ????????????????????????????????????????????
 	// Tell people about your new key
+	printf("\n b: Will propel the asteriod into your wall.");
 	
 	printf("\033[0m");
 	printf("\n t: Trace on/off toggle --> ");
