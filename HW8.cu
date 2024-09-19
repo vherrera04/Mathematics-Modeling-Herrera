@@ -332,21 +332,21 @@ float4 centerOfMass()
 	// ????????????????????????????????????????????????????????
 	// Return the center of mass of the system.
 
-	float totalMass = 0.0f;
+	float totalMass = 0.0f; // Initialize the total mass to zero
 
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{
-		centerOfMass.x += Position[i].x * SphereMass;
-		centerOfMass.y += Position[i].y * SphereMass;
-		centerOfMass.z += Position[i].z * SphereMass;
-		totalMass += SphereMass;
+		centerOfMass.x = centerOfMass.x + Position[i].x * SphereMass;  // Update x component
+    		centerOfMass.y = centerOfMass.y + Position[i].y * SphereMass;  // Update y component
+    		centerOfMass.z = centerOfMass.z + Position[i].z * SphereMass;  // Update z component
+		totalMass = totalMass + SphereMass;
 	}
 
 	if(totalMass > 0.0f)
 	{
-		centerOfMass.x /= totalMass;
-		centerOfMass.y /= totalMass;
-		centerOfMass.z /= totalMass;
+		centerOfMass.x = centerOfMass.x / totalMass;  // Average x position
+    		centerOfMass.y = centerOfMass.y / totalMass;  // Average y position
+    		centerOfMass.z = centerOfMass.z / totalMass;  // Average z position
 	}
 	
 	return(centerOfMass);
@@ -366,17 +366,17 @@ float4 linearVelocity()
 
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{
-		linearVelocity.x += Velocity[i].x * SphereMass;
-		linearVelocity.y += Velocity[i].y * SphereMass;
-		linearVelocity.z += Velocity[i].z * SphereMass;
-		totalMass += SphereMass;
+		linearVelocity.x = linearVelocity.x + Velocity[i].x * SphereMass;
+		linearVelocity.y = linearVelocity.y + Velocity[i].y * SphereMass;
+		linearVelocity.z = linearVelocity.z + Velocity[i].z * SphereMass;
+		totalMass = totalMass + SphereMass;
 	}
 
 	if(totalMass > 0.0f)
 	{
-		linearVelocity.x /= totalMass;
-		linearVelocity.y /= totalMass;
-		linearVelocity.z /= totalMass;
+		linearVelocity.x = linearVelocity.x / totalMass;
+		linearVelocity.y = linearVelocity.y / totalMass;
+		linearVelocity.z = linearVelocity.z / totalMass;
 	}
 
 	return(linearVelocity);
