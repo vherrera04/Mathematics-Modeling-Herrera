@@ -25,7 +25,6 @@ float4 Position[NUMBER_OF_BALLS], Velocity[NUMBER_OF_BALLS], Force[NUMBER_OF_BAL
 float SphereMass;
 float SphereDiameter;
 float MaxVelocity;
-//float BoxSideLength;
 int Trace;
 int Pause;
 int PrintRate;
@@ -98,8 +97,12 @@ void KeyPressed(unsigned char key, int x, int y)
         	for (int i = 0; i < NUMBER_OF_BALLS; i++)
         	{
            	Position[i] = pos; // Set all positions to the center of mass
-            	Velocity[i] = {0.0f, 0.0f, 0.0f, 0.0f}; // Set all velocities to zero
+            	Velocity[i] = vel; // Set all velocities to linear velocity
         	}
+
+		// Assuming you have functions to set the center of mass and velocity
+    		setCenterOfMass({0.0f, 0.0f, 0.0f, 0.0f}); // Reset center of mass
+    		setLinearVelocity({0.0f, 0.0f, 0.0f, 0.0f}); // Reset linear velocity
 
 		terminalPrint();
 		// ??????????????????????????????????????????
@@ -283,7 +286,6 @@ void setInitailConditions()
 	Dt = 0.001;
 	// How many time steps between termenal prints
 	PrintRate = 10;
-	//BoxSideLength = 10.0;
 }
 
 void drawPicture()
