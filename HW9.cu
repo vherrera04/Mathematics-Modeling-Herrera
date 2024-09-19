@@ -111,7 +111,7 @@ void KeyPressed(unsigned char key, int x, int y)
 		}
 		
 		drawPicture();
-		printf("\n The simulation has propelled the asteroid.\n");
+		printf("\n The simulation has been zeroed out.\n");
 	}
 	
 	if(key == 'k')
