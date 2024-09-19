@@ -88,7 +88,10 @@ void KeyPressed(unsigned char key, int x, int y)
 	// Make a key that will propel the asteriod into your wall
 	if(key == 'b')
 	{
-		
+		for (int i = 0; i < NUMBER_OF_BALLS; i++) 
+		{
+            		Velocity[i].x += 10.0; // Propel in the x direction
+		}
 	}
 	
 	if(key == 'k')
