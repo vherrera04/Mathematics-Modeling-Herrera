@@ -88,10 +88,30 @@ void KeyPressed(unsigned char key, int x, int y)
 	// Make a key that will propel the asteriod into your wall
 	if(key == 'b')
 	{
+		float4 pos, vel;
+		Pause = 1;
+		terminalPrint();
+		pos = centerOfMass();
+		vel = linearVelocity();
+		
+		for(int i = 0; i < NUMBER_OF_BALLS; i++)
+		{
+			Position[i].x -= pos.x;
+			Position[i].y -= pos.y;
+			Position[i].z -= pos.z;
+			
+			Velocity[i].x -= vel.x;
+			Velocity[i].y -= vel.y;
+			Velocity[i].z -= vel.z;
+		}
+		
 		for (int i = 0; i < NUMBER_OF_BALLS; i++) 
 		{
-            		Velocity[i].x = 10.0; // Propel in the x direction
+            		Velocity[i].x += 20.0; // Propel in the x direction
 		}
+		
+		drawPicture();
+		printf("\n The simulation has propelled the asteroid.\n");
 	}
 	
 	if(key == 'k')
