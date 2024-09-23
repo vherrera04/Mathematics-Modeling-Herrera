@@ -413,7 +413,7 @@ void getForces()
 	float wallStiffnessIn = 10000.0;
 	float wallStiffnessOut = 8000.0;
 	float k;
-	float halfSide = BoxSideLength/2.0;
+	float halfSide = 5.0;
 	float howMuch;
 	float ballRadius = SphereDiameter/2.0;
 	
