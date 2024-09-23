@@ -107,7 +107,7 @@ void KeyPressed(unsigned char key, int x, int y)
 		
 		for (int i = 0; i < NUMBER_OF_BALLS; i++) 
 		{
-            		Velocity[i].x += 20.0; // Propel in the x direction
+            		Velocity[i].x += 25.0; // Propel in the x direction
 		}
 		
 		drawPicture();
@@ -412,9 +412,9 @@ void getForces()
 	float magnitude;
 	float wallStiffnessIn = 10000.0;
 	float wallStiffnessOut = 8000.0;
-	float k;
-	float halfSide = 5.0;
-	float howMuch;
+	float kWall;
+	float halfSide = 25.0;
+	float amountOut;
 	float ballRadius = SphereDiameter/2.0;
 	
 	// Zeroing forces outside of the force loop just to be safe.
@@ -425,20 +425,24 @@ void getForces()
 		Force[i].z = 0.0;
 	}
 	
-	kSphere = 1000.0;
+	kSphere = 5000.0;
 	kSphereReduction = 0.5;
-	for(int i = 0; i < NUMBER_OF_BALLS; i++)
-	{	
-		// ?????????????????????????????????????????????????????
-		// Make the asteriods inelastically bounce off the wall.
 		
-		if(halfSide < (Position[i].x + ballRadius)) 
+		if((Position[i].x - ballRadius) < -halfSide)
 		{
-			howMuch = (Position[i].x + ballRadius) - halfSide;
-			if(0.0 < Velocity[i].x) k = wallStiffnessIn;
-			else k = wallStiffnessOut;
-			Force[i].x -= k*howMuch;
+			amountOut = -halfSide - (Position[i].x - ballRadius);
+			if(Velocity[i].x < 0.0) kWall = wallStiffnessIn;
+			else kWall = wallStiffnessOut;
+			Force[i].x += kWall*amountOut;
 		}
+		else if(halfSide < (Position[i].x + ballRadius))
+		{
+			amountOut = (Position[i].x + ballRadius) - halfSide;
+			if(0.0 < Velocity[i].x) kWall = wallStiffnessIn;
+			else kWall = wallStiffnessOut;
+			Force[i].x -= kWall*amountOut;
+		} 
+
 		
 		// This adds forces between asteriods.
 		for(int j = 0; j < i; j++)
