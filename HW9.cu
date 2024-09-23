@@ -30,7 +30,7 @@ int Pause;
 int PrintRate;
 int PrintCount;
 
-// Units and universal constantxs
+// Units and universal constants
 float MassUnitConverter;
 float LengthUnitConverter;
 float TimeUnitConverter;
@@ -239,7 +239,7 @@ void setInitialConditions()
 	
 	// If we did everthing right the universal gravity constant should be 1.
 	GravityConstant = 1.0;
-	printf("\n The gravity constant = %f in our units", GravityConstant);
+	printf("\n The gavity constant = %f in our units", GravityConstant);
 	
 	// All spheres are the same diameter and mass of Ceres so these should be 1..
 	SphereDiameter = 1.0;
@@ -427,7 +427,10 @@ void getForces()
 	
 	kSphere = 5000.0;
 	kSphereReduction = 0.5;
-		
+	for(int i = 0; i < NUMBER_OF_BALLS; i++)
+	{	
+		// ?????????????????????????????????????????????????????
+		// Make the asteriods inilastically bounce off the wall.
 		if((Position[i].x - ballRadius) < -halfSide)
 		{
 			amountOut = -halfSide - (Position[i].x - ballRadius);
@@ -442,7 +445,6 @@ void getForces()
 			else kWall = wallStiffnessOut;
 			Force[i].x -= kWall*amountOut;
 		} 
-
 		
 		// This adds forces between asteriods.
 		for(int j = 0; j < i; j++)
