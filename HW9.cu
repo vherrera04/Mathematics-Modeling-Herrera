@@ -410,6 +410,12 @@ void getForces()
 	float sphereRadius = SphereDiameter/2.0;
 	float d, dx, dy, dz;
 	float magnitude;
+	float wallStiffnessIn = 10000.0;
+	float wallStiffnessOut = 8000.0;
+	float k;
+	float halfSide = BoxSideLength/2.0;
+	float howMuch;
+	float ballRadius = SphereDiameter/2.0;
 	
 	// Zeroing forces outside of the force loop just to be safe.
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
@@ -426,7 +432,13 @@ void getForces()
 		// ?????????????????????????????????????????????????????
 		// Make the asteriods inelastically bounce off the wall.
 		
-		
+		if(halfSide < (Position[i].x + ballRadius)) 
+		{
+			howMuch = (Position[i].x + ballRadius) - halfSide;
+			if(0.0 < Velocity[i].x) k = wallStiffnessIn;
+			else k = wallStiffnessOut;
+			Force[i].x -= k*howMuch;
+		}
 		
 		// This adds forces between asteriods.
 		for(int j = 0; j < i; j++)
