@@ -431,20 +431,18 @@ void getForces()
 	{	
 		// ?????????????????????????????????????????????????????
 		// Make the asteriods inilastically bounce off the wall.
-		if((Position[i].x - ballRadius) < -halfSide)
-		{
-			amountOut = -halfSide - (Position[i].x - ballRadius);
-			if(Velocity[i].x < 0.0) kWall = wallStiffnessIn;
+		if ((Position[i].x + ballRadius) > 25.0 && (Position[i].y + ballRadius) > -halfSide && (Position[i].y - ballRadius) < halfSide && (Position[i].z + ballRadius) > -halfSide && (Position[i].z - ballRadius) < halfSide)
+    		{
+        		amountOut = (Position[i].x + ballRadius) - 25.0;
+        		if(0.0 < Velocity[i].x) kWall = wallStiffnessIn;
 			else kWall = wallStiffnessOut;
-			Force[i].x += kWall*amountOut;
-		}
-		else if(halfSide < (Position[i].x + ballRadius))
-		{
-			amountOut = (Position[i].x + ballRadius) - halfSide;
-			if(0.0 < Velocity[i].x) kWall = wallStiffnessIn;
-			else kWall = wallStiffnessOut;
-			Force[i].x -= kWall*amountOut;
-		} 
+        		Force[i].x -= kWall * amountOut; // Apply force for bouncing off
+        		
+        		if (Position[i].x)
+        		{
+        		
+        		}
+    		}
 		
 		// This adds forces between asteriods.
 		for(int j = 0; j < i; j++)
