@@ -413,7 +413,7 @@ void getForces()
 	float wallStiffnessIn = 10000.0;
 	float wallStiffnessOut = 8000.0;
 	float kWall;
-	float halfSide = 25.0;
+	float halfSide = 5.0;
 	float amountOut;
 	float ballRadius = SphereDiameter/2.0;
 	
@@ -430,20 +430,21 @@ void getForces()
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{	
 		// ?????????????????????????????????????????????????????
-		// Make the asteriods inilastically bounce off the wall.
+		// Make the asteriods inelastically bounce off the wall.
 		if ((Position[i].x + ballRadius) > 25.0 && (Position[i].y + ballRadius) > -halfSide && (Position[i].y - ballRadius) < halfSide && (Position[i].z + ballRadius) > -halfSide && (Position[i].z - ballRadius) < halfSide)
     		{
-        		amountOut = (Position[i].x + ballRadius) - 25.0;
-        		if(0.0 < Velocity[i].x) kWall = wallStiffnessIn;
-			else kWall = wallStiffnessOut;
-        		Force[i].x -= kWall * amountOut; // Apply force for bouncing off
-        		
-        		if (Position[i].x)
+        		if ((Position[i].x + ballRadius) > 25.0 && (Position[i].x + ballRadius) < 26.0)  
         		{
-        		
+        			if ((Position[i].y - ballRadius) > -5.0 && (Position[i].y - ballRadius) < 5.0 && (Position[i].z - ballRadius) > -5.0 && (Position[i].z - ballRadius) < 5.0)
+        			{
+        				amountOut = (Position[i].x + ballRadius) - 25.0;
+        				if(0.0 < Velocity[i].x) kWall = wallStiffnessIn;
+					else kWall = wallStiffnessOut;
+        				Force[i].x -= kWall * amountOut * kSphereReduction;
+        			}
         		}
     		}
-		
+    		
 		// This adds forces between asteriods.
 		for(int j = 0; j < i; j++)
 		{
