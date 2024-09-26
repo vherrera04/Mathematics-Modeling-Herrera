@@ -415,7 +415,7 @@ void getForces()
 	kWall = 20000.0;
 	kWallReduction = 0.2;
 	pSphere = 10000.0;
-	PSphereReduction = 0.5;
+	pSphereReduction = 0.5;
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{	
 		if(25.0 < Position[i].x + SphereDiameter/2.0 && Position[i].x + SphereDiameter/2.0 < 26.0)
@@ -466,8 +466,8 @@ void getForces()
 				
 				// ??????????????????????????????????????????????
 				// Make this be a quadratic repulsion model.. 
-				if(inOut < 0.0) magnitude = kSphere*(SphereDiameter- d.w); // If inOut is negative the sphere are converging.
-				else magnitude = pSphereReduction*kSphere*intersectionArea; // If inOut is positive the sphere are diverging.
+				if(inOut < 0.0) magnitude = pSphere*(SphereDiameter- d.w); // If inOut is negative the sphere are converging.
+				else magnitude = pSphereReduction*pSphere*intersectionArea; // If inOut is positive the sphere are diverging.
 				
 				
 				// Doling out the force in the proper perfortions using unit vectors.
