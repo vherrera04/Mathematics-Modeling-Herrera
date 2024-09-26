@@ -34,7 +34,7 @@ int PrintCount;
 float MassUnitConverter;
 float LengthUnitConverter;
 float TimeUnitConverter;
-float GavityConstant;
+float GravityConstant;
 
 // Window globals
 static int Window;
@@ -57,7 +57,7 @@ void Display();
 void idle();
 void reshape(int, int);
 void KeyPressed(unsigned char, int, int);
-void setInitailConditions();
+void setInitialConditions();
 void drawPicture();
 float4 centerOfMass();
 float4 linearVelocity();
@@ -186,7 +186,7 @@ void KeyPressed(unsigned char key, int x, int y)
 	}
 }
 
-void setInitailConditions()
+void setInitialConditions()
 {
 	time_t t;
 	float seperation;
@@ -203,7 +203,7 @@ void setInitailConditions()
 	// If you multiply one of our units by this number it will convert it the outside world units.
 	// If you divide an outside world unit by this number it will convert it to our units
 	// We are setting the mass unit to be the mass of Ceres.
-	// We are settting the length unit to be th diameter of Ceres.
+	// We are setting the length unit to be th diameter of Ceres.
 	// We are setting the time unit to be the such that the universal gravity constant is 1.
 	MassUnitConverter = 9.383e20; // kg
 	LengthUnitConverter = 940.0; // km
@@ -213,8 +213,8 @@ void setInitailConditions()
 	printf("\n TimeUnitConverter = %e hours", TimeUnitConverter);
 	
 	// If we did everthing right the universal gravity constant should be 1.
-	GavityConstant = 1.0;
-	printf("\n The gavity constant = %f in our units", GavityConstant);
+	GravityConstant = 1.0;
+	printf("\n The Gravity constant = %f in our units", GravityConstant);
 	
 	// All spheres are the same diameter and mass of Ceres so these should be 1..
 	SphereDiameter = 1.0;
@@ -470,7 +470,7 @@ void getForces()
 				
 				// This adds the gravity between asteroids but the gravity is lock in at what it 
 				// was at impact.
-				magnitude = GavityConstant*SphereMass*SphereMass/(SphereDiameter*SphereDiameter);
+				magnitude = GravityConstant*SphereMass*SphereMass/(SphereDiameter*SphereDiameter);
 				Force[i].x += magnitude*unit.x;
 				Force[i].y += magnitude*unit.y;
 				Force[i].z += magnitude*unit.z;
@@ -482,7 +482,7 @@ void getForces()
 			else
 			{
 				// This adds the gravity between asteroids when they are not touching.
-				magnitude = GavityConstant*SphereMass*SphereMass/(d.w*d.w);
+				magnitude = GravityConstant*SphereMass*SphereMass/(d.w*d.w);
 				Force[i].x += magnitude*unit.x;
 				Force[i].y += magnitude*unit.y;
 				Force[i].z += magnitude*unit.z;
@@ -549,7 +549,7 @@ void startMeUp()
 	Trace = 0;
 	Pause = 1;
 	PrintCount = 0;
-	setInitailConditions();
+	setInitialConditions();
 	printf("\033[0;31m\n\n The simulation is paused. Type p in the simulation window to start it. \n");
 	printf("\033[0m");
 }
