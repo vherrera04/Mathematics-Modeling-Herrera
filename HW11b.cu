@@ -298,7 +298,17 @@ void drawPicture()
 	}
 	
 	// Drawing the wall.
-	glLineWidth(3.0);
+	float halfSide = 5.0;
+
+	glColor3d(1.0, 0.0, 1.0);
+	glBegin(GL_QUADS);
+		glVertex3f(25, -halfSide, -halfSide);
+		glVertex3f(25, halfSide, -halfSide);
+		glVertex3f(25, halfSide, halfSide);
+		glVertex3f(25, -halfSide, halfSide);
+	glEnd();
+	
+	/* glLineWidth(3.0);
 	//Drawing front of box
 	glColor3d(0.0, 1.0, 0.0);
 	glBegin(GL_LINE_LOOP);
@@ -307,7 +317,7 @@ void drawPicture()
 		glVertex3f(25.0, 5.0, -5.0);
 		glVertex3f(25.0, 5.0, 5.0);
 		glVertex3f(25.0, -5.0, 5.0);
-	glEnd();
+	glEnd(); */
 	
 	glColor3d(1.0, 0.0, 0.0);
 	glPointSize(10.0f);
@@ -387,7 +397,7 @@ void zeroOutSystem()
 void getForces()
 {
 	float inOut;
-	float kSphere,kSphereReduction;
+	float kSphere,cSphereReduction;
 	float kWall, kWallReduction;
 	float4 d, unit, dv;
 	float magnitude;
@@ -405,7 +415,7 @@ void getForces()
 	kWall = 20000.0;
 	kWallReduction = 0.2;
 	kSphere = 10000.0;
-	kSphereReduction = 0.5;
+	cSphereReduction = 0.5;
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{	
 		if(25.0 < Position[i].x + SphereDiameter/2.0 && Position[i].x + SphereDiameter/2.0 < 26.0)
@@ -457,7 +467,7 @@ void getForces()
 				// ??????????????????????????????????????????????
 				// Make this be an an ideal gas repulsion model.. 
 				if(inOut < 0.0) magnitude = kSphere*(SphereDiameter- d.w); // If inOut is negative the sphere are converging.
-				else magnitude = kSphereReduction*kSphere*(SphereDiameter- d.w); // If inOut is positive the sphere are diverging.
+				else magnitude = cSphereReduction*kSphere*((intersectionArea)/(bodyVolume)); // If inOut is positive the sphere are diverging.
 				
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*unit.x;
