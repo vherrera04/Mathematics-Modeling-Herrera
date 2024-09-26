@@ -397,7 +397,7 @@ void zeroOutSystem()
 void getForces()
 {
 	float inOut;
-	float kSphere,PSphereReduction;
+	float kSphere,pSphereReduction;
 	float kWall, kWallReduction;
 	float4 d, unit, dv;
 	float magnitude;
