@@ -397,7 +397,7 @@ void zeroOutSystem()
 void getForces()
 {
 	float inOut;
-	float kSphere,pSphereReduction;
+	float pSphere,pSphereReduction;
 	float kWall, kWallReduction;
 	float4 d, unit, dv;
 	float magnitude;
@@ -414,7 +414,7 @@ void getForces()
 	
 	kWall = 20000.0;
 	kWallReduction = 0.2;
-	kSphere = 10000.0;
+	pSphere = 10000.0;
 	PSphereReduction = 0.5;
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{	
