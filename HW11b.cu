@@ -397,7 +397,7 @@ void zeroOutSystem()
 void getForces()
 {
 	float inOut;
-	float kSphere,cSphereReduction;
+	float cSphere,cSphereReduction;
 	float kWall, kWallReduction;
 	float4 d, unit, dv;
 	float magnitude;
@@ -414,7 +414,7 @@ void getForces()
 	
 	kWall = 20000.0;
 	kWallReduction = 0.2;
-	kSphere = 10000.0;
+	cSphere = 10000.0;
 	cSphereReduction = 0.5;
 	for(int i = 0; i < NUMBER_OF_BALLS; i++)
 	{	
@@ -466,8 +466,8 @@ void getForces()
 				inOut = d.x*dv.x + d.y*dv.y + d.z*dv.z;
 				// ??????????????????????????????????????????????
 				// Make this be an an ideal gas repulsion model.. 
-				if(inOut < 0.0) magnitude = kSphere*(SphereDiameter- d.w); // If inOut is negative the sphere are converging.
-				else magnitude = cSphereReduction*kSphere*((intersectionArea)/(bodyVolume)); // If inOut is positive the sphere are diverging.
+				if(inOut < 0.0) magnitude = cSphere*(SphereDiameter- d.w); // If inOut is negative the sphere are converging.
+				else magnitude = cSphereReduction*cSphere*((intersectionArea)/(bodyVolume)); // If inOut is positive the sphere are diverging.
 				
 				// Doling out the force in the proper perfortions using unit vectors.
 				Force[i].x -= magnitude*unit.x;
