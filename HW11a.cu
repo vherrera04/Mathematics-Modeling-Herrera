@@ -466,8 +466,8 @@ void getForces()
 				
 				// ??????????????????????????????????????????????
 				// Make this be a quadratic repulsion model.. 
-				// if(inOut < 0.0) magnitude = kSphere*(SphereDiameter- d.w); // If inOut is negative the sphere are converging.
-				// else magnitude = pSphereReduction*kSphere*intersectionArea; // If inOut is positive the sphere are diverging.
+				if(inOut < 0.0) magnitude = kSphere*(SphereDiameter- d.w); // If inOut is negative the sphere are converging.
+				else magnitude = pSphereReduction*kSphere*intersectionArea; // If inOut is positive the sphere are diverging.
 				
 				
 				// Doling out the force in the proper perfortions using unit vectors.
