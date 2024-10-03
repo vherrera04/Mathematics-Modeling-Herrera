@@ -197,7 +197,7 @@ void setInitailConditions()
 	double diameterOfCeres;
 	double densityOfCeres;
 	double volumeOfCeres;
-	double G = 6.67430e-11; //km^3/kg*hr^2
+	double G = 8.649893e-13; //km^3/kg*hr^2
 	
 	// Seeding the random number generater.
 	srand((unsigned) time(&t));
