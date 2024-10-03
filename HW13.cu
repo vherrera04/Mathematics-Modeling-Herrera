@@ -35,7 +35,7 @@ int WallCount;
 double MassUnitConverter;
 double LengthUnitConverter;
 double TimeUnitConverter;
-float GavityConstant;
+float GravityConstant;
 
 // Window globals
 static int Window;
@@ -209,25 +209,25 @@ void setInitailConditions()
 	// If you multiply one of our units by this number it will convert it the outside world units.
 	// If you divide an outside world unit by this number it will convert it to our units
 	// We are setting the mass unit to be the mass of Ceres.
-	// We are settting the length unit to be th diameter of Ceres.
+	// We are setting the length unit to be th diameter of Ceres.
 	// We are setting the time unit to be the such that the universal gravity constant is 1.
 	
-	massOfCeres = ????; // kg
-	diameterOfCeres = ????; // km
-	densityOfCeres = ????; // kg/km^3
-	volumeOfCeres = ????; // km^3
+	massOfCeres = 9.383e20; // kg
+	diameterOfCeres = 940; // km
+	densityOfCeres = 2.15754e12; // kg/km^3
+	volumeOfCeres = (PI/6)(940*940*940); // km^3
 	
-	MassUnitConverter = ????; // kg
-	LengthUnitConverter = ????; // km
-	TimeUnitConverter = ????; // hr
+	MassUnitConverter = 9.383e20/ NUMBER_OF_BODIES; // kg
+	LengthUnitConverter = 940 * cbrt(NUMBER_OF_BODIES); // km
+	TimeUnitConverter = 1.0112; // hr
 	
 	printf("\n MassUnitConverter = %e kilograms", MassUnitConverter);
 	printf("\n LengthUnitConverter = %e kilometers", LengthUnitConverter);
 	printf("\n TimeUnitConverter = %e hours", TimeUnitConverter);
 	
-	// If we did everthing right the universal gravity constant should be 1.
-	GavityConstant = 1.0;
-	printf("\n The gavity constant = %f in our units", GavityConstant);
+	// If we did everything right the universal gravity constant should be 1.
+	GravityConstant = 1.0;
+	printf("\n The gravity constant = %f in our units", GravityConstant);
 	
 	// All spheres are the same diameter and mass so these should be 1..
 	SphereDiameter = 1.0;
@@ -288,7 +288,7 @@ void setInitailConditions()
 	TotalRunTime = 10.0*24.0/TimeUnitConverter;
 	RunTime = 0.0;
 	Dt = 0.001;
-	// How many time steps between termenal prints
+	// How many time steps between terminal prints
 	PrintRate = 10;
 }
 
@@ -433,7 +433,7 @@ void getForces()
 	{	
 		if(25.0 < Position[i].x + SphereDiameter/2.0 && Position[i].x + SphereDiameter/2.0 < 26.0)
 		{
-			if(-5.0 < Position[i].z && Position[i].z < 5.0 && -5.0 < Position[i].z && Position[i].z < 5.0)
+			if(-5.0 < Position[i].y && Position[i].y < 5.0 && -5.0 < Position[i].z && Position[i].z < 5.0)
 			{
 				if(0.0 < Velocity[i].x)
 				{
@@ -493,7 +493,7 @@ void getForces()
 				
 				// This adds the gravity between asteroids but the gravity is lock in at what it 
 				// was at impact.
-				magnitude = GavityConstant*SphereMass*SphereMass/(SphereDiameter*SphereDiameter);
+				magnitude = GravityConstant*SphereMass*SphereMass/(SphereDiameter*SphereDiameter);
 				Force[i].x += magnitude*unit.x;
 				Force[i].y += magnitude*unit.y;
 				Force[i].z += magnitude*unit.z;
@@ -505,7 +505,7 @@ void getForces()
 			else
 			{
 				// This adds the gravity between asteroids when they are not touching.
-				magnitude = GavityConstant*SphereMass*SphereMass/(d.w*d.w);
+				magnitude = GravityConstant*SphereMass*SphereMass/(d.w*d.w);
 				Force[i].x += magnitude*unit.x;
 				Force[i].y += magnitude*unit.y;
 				Force[i].z += magnitude*unit.z;
