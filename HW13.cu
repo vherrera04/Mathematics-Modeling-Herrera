@@ -217,8 +217,8 @@ void setInitailConditions()
 	densityOfCeres = 2.15754e12; // kg/km^3
 	volumeOfCeres = (PI/6)(940*940*940); // km^3
 	
-	MassUnitConverter = 9.383e20/ NUMBER_OF_BODIES; // kg
-	LengthUnitConverter = 940 * cbrt(NUMBER_OF_BODIES); // km
+	MassUnitConverter = massOfCeres / NUMBER_OF_BODIES; // kg
+	LengthUnitConverter = diameterOfCeres * cbrt(NUMBER_OF_BODIES); // km
 	TimeUnitConverter = 1.0112; // hr
 	
 	printf("\n MassUnitConverter = %e kilograms", MassUnitConverter);
