@@ -22,7 +22,7 @@ float TotalRunTime;
 float RunTime;
 float Dt;
 float4 Position[NUMBER_OF_BODIES], Velocity[NUMBER_OF_BODIES], Force[NUMBER_OF_BODIES], Color[NUMBER_OF_BODIES];
-// ????? you will put your masses and radii in here.
+// ????? you will put your masses and radii in here
 float BodyMass[NUMBER_OF_BODIES], BodyRadius[NUMBER_OF_BODIES];
 // You will need to get ride of these and replace them with the ones above.
 float SphereMass;
