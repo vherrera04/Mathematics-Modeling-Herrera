@@ -23,7 +23,6 @@ float RunTime;
 float Dt;
 float4 Position[NUMBER_OF_BODIES], Velocity[NUMBER_OF_BODIES], Force[NUMBER_OF_BODIES], Color[NUMBER_OF_BODIES];
 // ????? you will put your masses and radii in here
-float 
 float BodyMass[NUMBER_OF_BODIES], BodyRadius[NUMBER_OF_BODIES];
 // You will need to get ride of these and replace them with the ones above.
 //float SphereMass;
@@ -221,22 +220,17 @@ void setInitialConditions()
 	
 	// ??????????
 	// Use random numbers to get all your different mass bodies
-	// BodyMass[i] = ????
-	BodyMass.x = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
-	BodyMass.y = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
-	BodyMass.z = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
+	BodyMass = (((float)rand()/(float)RAND_MAX));
+	BodyMass[i] = ????
 	
-	// ??? Set your mass unit
+	//Set your mass unit
 	MassUnitConverter = massOfCeres/NUMBER_OF_BODIES; // kg
 	
 	// From the random masses you just did set all your corresponding radii
-	// BodyRadius[] = ???? 
-	BodyRadius.x = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0);
-	BodyRadius.y = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0);
-	BodyRadius.z = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0);
+	BodyRadius[] = 
 	
 	// Set your length unit
-	LengthUnitConverter = pow((massOfCeres*6.0/(PI*NUMBER_OF_BODIES*densityOfCeres)),1.0/3.0); // km
+	LengthUnitConverter = diameterOfCeres*pow(massOfCeres/BodyMass,1.0/3.0); // km
 	TimeUnitConverter = sqrt(LengthUnitConverter*LengthUnitConverter*LengthUnitConverter/(G*MassUnitConverter)); // hr
 	
 	printf("\n MassUnitConverter = %e kilograms", MassUnitConverter);
