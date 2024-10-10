@@ -23,10 +23,11 @@ float RunTime;
 float Dt;
 float4 Position[NUMBER_OF_BODIES], Velocity[NUMBER_OF_BODIES], Force[NUMBER_OF_BODIES], Color[NUMBER_OF_BODIES];
 // ????? you will put your masses and radii in here
+float 
 float BodyMass[NUMBER_OF_BODIES], BodyRadius[NUMBER_OF_BODIES];
 // You will need to get ride of these and replace them with the ones above.
-float SphereMass;
-float SphereDiameter;
+//float SphereMass;
+//float SphereDiameter;
 float MaxVelocity;
 int Trace;
 int Pause;
@@ -227,6 +228,9 @@ void setInitialConditions()
 	
 	// From the random masses you just did set all your corresponding radii
 	// BodyRadius[] = ???? 
+	BodyRadius.x = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
+	BodyRadius.y = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
+	BodyRadius.z = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
 	
 	// Set your length unit
 	LengthUnitConverter = pow((massOfCeres*6.0/(PI*NUMBER_OF_BODIES*densityOfCeres)),1.0/3.0); // km
@@ -325,7 +329,7 @@ void drawPicture()
 	}
 	
 	// Drawing the wall.
-	glColor3d(1.0, 1.0, 0.75);
+	glColor3d(1.0, 0.0, 1.0);
 	glBegin(GL_QUADS);
 		glVertex3f(25.0, -5.0, 5.0);
 		glVertex3f(25.0, -5.0, -5.0);
