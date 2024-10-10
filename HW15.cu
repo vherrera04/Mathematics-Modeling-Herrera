@@ -222,15 +222,18 @@ void setInitialConditions()
 	// ??????????
 	// Use random numbers to get all your different mass bodies
 	// BodyMass[i] = ????
+	BodyMass.x = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
+	BodyMass.y = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
+	BodyMass.z = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
 	
-	// ??? Set you mass unit
+	// ??? Set your mass unit
 	MassUnitConverter = massOfCeres/NUMBER_OF_BODIES; // kg
 	
 	// From the random masses you just did set all your corresponding radii
 	// BodyRadius[] = ???? 
-	BodyRadius.x = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
-	BodyRadius.y = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
-	BodyRadius.z = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0)*massOfCeres;
+	BodyRadius.x = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0);
+	BodyRadius.y = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0);
+	BodyRadius.z = (((float)rand()/(float)RAND_MAX)*2.0 - 1.0);
 	
 	// Set your length unit
 	LengthUnitConverter = pow((massOfCeres*6.0/(PI*NUMBER_OF_BODIES*densityOfCeres)),1.0/3.0); // km
@@ -244,12 +247,12 @@ void setInitialConditions()
 	GravityConstant = 1.0;
 	printf("\n The gravity constant = %f in our units", GravityConstant);
 	
-	// All spheres are the same diameter and mass so these should be 1. Noy true
+	// All spheres are the same diameter and mass so these should be 1. Not true
 	// ??? don't need these.They will be close to one but not exactly one anymore.
 	// Also you will just need to replace all these in the code with your new ones.
 	// Have fun finding them all!!!
-	SphereDiameter = 1.0;
-	SphereMass = 1.0;
+	//SphereDiameter = 1.0;
+	//SphereMass = 1.0;
 	
 	// Making the size of the intial globe we use to place the bodies.
 	globeSize = 10.0*SphereDiameter;
@@ -260,7 +263,7 @@ void setInitialConditions()
 	
 	for(int i = 0; i < NUMBER_OF_BODIES; i++)
 	{
-		// Settting the balls randomly in a large sphere and not letting them be right on top of each other.
+		// Setting the balls randomly in a large sphere and not letting them be right on top of each other.
 		test = 0;
 		while(test == 0)
 		{
