@@ -464,6 +464,8 @@ void getForces()
 		
 		
 		// This adds forces between asteriods.
+		// float constantRepulsionForce = 1000.0; // Define a constant repulsion force
+		// float areaThreshold = (BodyRadius[i] + BodyRadius[j]) * 0.9; // Define a threshold (90% of combined radii)
 		for(int j = 0; j < i; j++)
 		{
 			d.x = Position[j].x - Position[i].x;
@@ -475,15 +477,15 @@ void getForces()
 			unit.z = d.z/d.w;
 			
 			// Nonelastic sphere collisions 
-			if(d.w < (BodyRadius[i] + BodyRadius[j])/10.0)
+			if (distance < areaThreshold) //if(d.w < (BodyRadius[i] + BodyRadius[j])/10.0)
 			{
 				// If the seperation gets too small the sphers may go through each other.
 				// If you are ok with that you do not need this line.
-				if(d.w < BodyRadius[i] + BodyRadius[j])
+				/* if(d.w < BodyRadius[i] + BodyRadius[j])
 				{
 					printf("\n Spheres %d and %d got to close. Make your sphere repultion stronger\n", i, j);
 					exit(0);
-				}
+				} */
 				
 				intersectionArea = (PI/4.0)*((BodyRadius[i] + BodyRadius[j]) - d.w*d.w);
 				
@@ -520,14 +522,20 @@ void getForces()
 			else
 			{
 				// This adds the gravity between asteroids when they are not touching.
-				magnitude = GravityConstant*(BodyMass[i]*BodyMass[j])/(d.w*d.w);
+				/* magnitude = GravityConstant*(BodyMass[i]*BodyMass[j])/(d.w*d.w);
 				Force[i].x += magnitude*unit.x;
 				Force[i].y += magnitude*unit.y;
 				Force[i].z += magnitude*unit.z;
 				
 				Force[j].x -= magnitude*unit.x;
 				Force[j].y -= magnitude*unit.y;
-				Force[j].z -= magnitude*unit.z;
+				Force[j].z -= magnitude*unit.z; */
+				Force[i].x -= constantRepulsionForce * unit.x;
+        			Force[i].y -= constantRepulsionForce * unit.y;
+        			Force[i].z -= constantRepulsionForce * unit.z;
+        			Force[j].x += constantRepulsionForce * unit.x;
+        			Force[j].y += constantRepulsionForce * unit.y;
+        			Force[j].z += constantRepulsionForce * unit.z;
 			}
 		}
 	}
