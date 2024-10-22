@@ -200,6 +200,7 @@ void setInitialConditions()
 	double diameterOfCeres;
 	// double densityOfCeres;
 	double G = (8.649828e-13); //km^3/kg*hr^2
+	double totalMass = 0.0;
 	
 	// Seeding the random number generater.
 	srand((unsigned) time(&t));
@@ -219,7 +220,7 @@ void setInitialConditions()
 
 	for (int i = 0; i < NUMBER_OF_BODIES; ++i)
 	{
-		BodyMass[i] = BodyMass[i]/totalMass)*massOfCeres;
+		BodyMass[i] = (BodyMass[i]/totalMass)*massOfCeres;
 	}
 	// Set your mass unit
 	MassUnitConverter = massOfCeres/NUMBER_OF_BODIES; // kg
@@ -662,12 +663,12 @@ int main(int argc, char** argv)
 
 	// Clip plains
 	Near = 0.2;
-	Far = 50.0*(BodyRadius[i] + BodyRadius[j]);
+	Far = 50.0*(BodyRadius[i] + BodyRadius[0]);
 
 	//Where your eye is located
 	EyeX = 0.0;
 	EyeY = 0.0;
-	EyeZ = 25.0*(BodyRadius[i] + BodyRadius[j]);
+	EyeZ = 25.0*(BodyRadius[i] + BodyRadius[0]);
 
 	//Where you are looking
 	CenterX = 0.0;
