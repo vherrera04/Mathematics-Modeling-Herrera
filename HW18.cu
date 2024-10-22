@@ -520,17 +520,17 @@ void getForces()
 				// Finding which body is largest.
 				if(BodyRadius[j] < BodyRadius[i])
 				{
-					????
+					LargerBody = BodyRadius[i];
 				}
 				else
 				{
-					????
+					LargerBody = BodyRadius[j];
 				}
 				
 				// Finding the intersection area.
 				// The intersection area gets too large (If one sphere goes into the other).
 				// Set it as the radius of the smaller sphere.
-				temp = ; //
+				temp = (d.w*d.w - )/2*d.w; //
 				if(0.0 < temp)
 				{
 					intersectionArea = PI*(r2*r2 - temp*temp);
