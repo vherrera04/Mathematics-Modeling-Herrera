@@ -530,6 +530,8 @@ void getForces()
 				// Finding the intersection area.
 				// The intersection area gets too large (If one sphere goes into the other).
 				// Set it as the radius of the smaller sphere.
+				r1=
+				r2=
 				temp = (d.w*d.w - )/2*d.w; //
 				if(0.0 < temp)
 				{
