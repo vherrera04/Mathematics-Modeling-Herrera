@@ -249,7 +249,7 @@ void setInitialConditions()
 	// Also you will just need to replace all these in the code with your new ones.
 	// Have fun finding them all!!!
 	//SphereDiameter = 1.0;
-	//SphereMass = 1.0;
+	//ass = 1.0;
 	for (int i = 0; i < NUMBER_OF_BODIES; ++i)
 	{
 		BodyRadius[i] /= LengthUnitConverter;
@@ -368,7 +368,7 @@ float4 centerOfMass()
     		centerOfMass.x += Position[i].x*BodyMass[i];
 		centerOfMass.y += Position[i].y*BodyMass[i];
 		centerOfMass.z += Position[i].z*BodyMass[i];
-		totalMass += SphereMass;
+		totalMass += BodyMass[i];
 	}
 	centerOfMass.x /= totalMass;
 	centerOfMass.y /= totalMass;
@@ -662,12 +662,12 @@ int main(int argc, char** argv)
 
 	// Clip plains
 	Near = 0.2;
-	Far = 50.0*SphereDiameter;
+	Far = 50.0*(BodyRadius[i] + BodyRadius[j]);
 
 	//Where your eye is located
 	EyeX = 0.0;
 	EyeY = 0.0;
-	EyeZ = 25.0*SphereDiameter;
+	EyeZ = 25.0*(BodyRadius[i] + BodyRadius[j]);
 
 	//Where you are looking
 	CenterX = 0.0;
