@@ -28,6 +28,8 @@ float BodyMass[NUMBER_OF_BODIES], BodyRadius[NUMBER_OF_BODIES];
 //float SphereMass;
 //float SphereDiameter;
 float MaxVelocity;
+float randomNumber;
+int i;
 int Trace;
 int Pause;
 int PrintRate;
