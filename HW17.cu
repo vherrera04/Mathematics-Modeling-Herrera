@@ -518,24 +518,30 @@ void getForces()
 				Force[j].x -= magnitude*unit.x;
 				Force[j].y -= magnitude*unit.y;
 				Force[j].z -= magnitude*unit.z;
+
+				if (d.w< BodyRadius[i] + BodyRadius[j])
+				{
+					Force[i].x -= constantRepulsionForce * unit.x;
+        				Force[i].y -= constantRepulsionForce * unit.y;
+        				Force[i].z -= constantRepulsionForce * unit.z;
+        				Force[j].x += constantRepulsionForce * unit.x;
+        				Force[j].y += constantRepulsionForce * unit.y;
+        				Force[j].z += constantRepulsionForce * unit.z;
+				}
+
 			}
+
 			else
 			{
 				// This adds the gravity between asteroids when they are not touching.
-				/* magnitude = GravityConstant*(BodyMass[i]*BodyMass[j])/(d.w*d.w);
+				magnitude = GravityConstant*(BodyMass[i]*BodyMass[j])/(d.w*d.w);
 				Force[i].x += magnitude*unit.x;
 				Force[i].y += magnitude*unit.y;
 				Force[i].z += magnitude*unit.z;
 				
 				Force[j].x -= magnitude*unit.x;
 				Force[j].y -= magnitude*unit.y;
-				Force[j].z -= magnitude*unit.z; */
-				Force[i].x -= constantRepulsionForce * unit.x;
-        			Force[i].y -= constantRepulsionForce * unit.y;
-        			Force[i].z -= constantRepulsionForce * unit.z;
-        			Force[j].x += constantRepulsionForce * unit.x;
-        			Force[j].y += constantRepulsionForce * unit.y;
-        			Force[j].z += constantRepulsionForce * unit.z;
+				Force[j].z -= magnitude*unit.z; 
 			}
 		}
 	}
