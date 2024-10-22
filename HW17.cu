@@ -464,8 +464,8 @@ void getForces()
 		
 		
 		// This adds forces between asteriods.
-		// float constantRepulsionForce = 1000.0; // Define a constant repulsion force
-		// float areaThreshold = (BodyRadius[i] + BodyRadius[j]) * 0.9; // Define a threshold (90% of combined radii)
+		float constantRepulsionForce = 1000.0; // Define a constant repulsion force
+		float areaThreshold = (BodyRadius[i] + BodyRadius[j]) * 0.9; // Define a threshold (90% of combined radii)
 		for(int j = 0; j < i; j++)
 		{
 			d.x = Position[j].x - Position[i].x;
@@ -477,7 +477,7 @@ void getForces()
 			unit.z = d.z/d.w;
 			
 			// Nonelastic sphere collisions 
-			if (distance < areaThreshold) //if(d.w < (BodyRadius[i] + BodyRadius[j])/10.0)
+			if (d.w < areaThreshold) //if(d.w < (BodyRadius[i] + BodyRadius[j])/10.0)
 			{
 				// If the seperation gets too small the sphers may go through each other.
 				// If you are ok with that you do not need this line.
