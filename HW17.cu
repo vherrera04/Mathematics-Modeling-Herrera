@@ -465,9 +465,9 @@ void getForces()
 		
 		// This adds forces between asteriods.
 		float constantRepulsionForce = 1000.0; // Define a constant repulsion force
-		float areaThreshold = (BodyRadius[i] + BodyRadius[j]) * 0.9; // Define a threshold (90% of combined radii)
 		for(int j = 0; j < i; j++)
 		{
+			float areaThreshold = (BodyRadius[i] + BodyRadius[j]) * 0.9; // Define a threshold (90% of combined radii)
 			d.x = Position[j].x - Position[i].x;
 			d.y = Position[j].y - Position[i].y;
 			d.z = Position[j].z - Position[i].z;
