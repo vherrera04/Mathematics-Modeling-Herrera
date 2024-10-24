@@ -526,8 +526,8 @@ void getForces()
 				{
 					LargerBody = BodyRadius[j];
 				}
-				float max, min;
 
+				float max, min;
 				if (r1 > r2) 
 				{
     					max = r1;
