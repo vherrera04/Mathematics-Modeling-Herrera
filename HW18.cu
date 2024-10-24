@@ -518,34 +518,21 @@ void getForces()
 				}
 				
 				// Finding which body is largest.
-				float LargerBody;
 				if(BodyRadius[j] < BodyRadius[i])
 				{
-					LargerBody = BodyRadius[i];
+					r1 = BodyRadius[i];
+					r2 = BodyRadius[j];
 				}
 				else
 				{
-					LargerBody = BodyRadius[j];
-				}
-
-				float max, min;
-				if (r1 > r2) 
-				{
-    					max = r1;
-    					min = r2;
+					r1 = BodyRadius[j];
+					r2 = BodyRadius[i];
 				} 
-				else 
-				{
-    					max = r2;
-    					min = r1;
-				}
-				
+
 				// Finding the intersection area.
 				// The intersection area gets too large (If one sphere goes into the other).
 				// Set it as the radius of the smaller sphere.
-				r1= BodyRadius[i];
-				r2= BodyRadius[j];
-				temp = (d.w*d.w - max*max + min*min )/(2*d.w); //
+				temp = (d.w*d.w - r1*r1 + r2*r2 )/(2*d.w); 
 				if(0.0 < temp)
 				{
 					intersectionArea = PI*(r2*r2 - temp*temp);
