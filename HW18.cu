@@ -518,6 +518,7 @@ void getForces()
 				}
 				
 				// Finding which body is largest.
+				float LargerBody;
 				if(BodyRadius[j] < BodyRadius[i])
 				{
 					LargerBody = BodyRadius[i];
