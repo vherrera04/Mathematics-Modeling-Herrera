@@ -85,7 +85,7 @@ void reshape(int w, int h)
 
 void KeyPressed(unsigned char key, int x, int y)
 {
-	if(key == 'g')
+	/* if(key == 'g')
 	{
 		Pause = 1;
 		terminalPrint();
@@ -100,7 +100,7 @@ void KeyPressed(unsigned char key, int x, int y)
 		drawPicture();
 		printf("\n Asteroids are ready to go.");
 		printf("\n Press 'p' to hire them into the wall with a velocity of %f kilometers per hour.\n", 20.0*LengthUnitConverter/TimeUnitConverter);
-	}
+	} */
 	
 	if(key == 'k')
 	{
@@ -367,7 +367,7 @@ void drawPicture()
 		glPopMatrix();
 	}
 	
-	// Drawing the wall.
+	/* // Drawing the wall.
 	glColor3d(1.0, 0.0, 1.0);
 	glBegin(GL_QUADS);
 		glVertex3f(25.0, -5.0, 5.0);
@@ -382,7 +382,7 @@ void drawPicture()
 	glPointSize(10.0f);
 	glBegin(GL_POINTS);
 		glVertex3f(25.0f, 0.0f, 0.0f);
-	glEnd();
+	glEnd(); */
 	
 	glutSwapBuffers();
 }
@@ -457,7 +457,7 @@ void getForces()
 {
 	float inOut;
 	float kSphere,kSphereReduction;
-	float kWall, kWallReduction;
+	// float kWall, kWallReduction;
 	float4 d, unit, dv;
 	float magnitude;
 	float intersectionArea; 
@@ -472,7 +472,7 @@ void getForces()
 		Force[i].z = 0.0;
 	}
 	
-	kWall = 20000.0;
+	/* kWall = 20000.0;
 	kWallReduction = 0.5;
 	kSphere = 1000.0;
 	kSphereReduction = 0.3;
@@ -492,7 +492,7 @@ void getForces()
 				}
 				Force[i].x -= magnitude;
 			}
-		}
+		} */
 		
 		
 		// This adds forces between asteriods.
