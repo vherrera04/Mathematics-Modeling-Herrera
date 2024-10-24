@@ -543,8 +543,8 @@ void getForces()
 				// The intersection area gets too large (If one sphere goes into the other).
 				// Set it as the radius of the smaller sphere.
 				r1= BodyRadius[i];
-				r2= BodyRadius[j]
-				temp = (d.w*d.w - max*max + min*min )/2*d.w; //
+				r2= BodyRadius[j];
+				temp = (d.w*d.w - max*max + min*min )/(2*d.w); //
 				if(0.0 < temp)
 				{
 					intersectionArea = PI*(r2*r2 - temp*temp);
