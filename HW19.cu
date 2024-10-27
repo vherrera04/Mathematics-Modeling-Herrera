@@ -14,7 +14,7 @@
 #include <curand.h>
 #include <curand_kernel.h>
 
-#define NUMBER_OF_BODIES 500
+#define NUMBER_OF_BODIES 6
 #define PI 3.14159
 using namespace std;
 
@@ -28,7 +28,7 @@ int Trace;
 int Pause;
 int PrintRate;
 int PrintCount;
-int WallCount;
+//int WallCount;
 
 // Units and universal constants
 double MassUnitConverter;
@@ -201,16 +201,6 @@ void setInitialConditions()
 	
 	// Seeding the random number generater.
 	srand((unsigned) time(&t));
-	
-	// The units that we will use to connect us to the outside world are: 
-	// kilometers (km)
-	// kilograms (kg)
-	// hours (hr)
-	// If you multiply one of our units by this number it will convert it the outside world units.
-	// If you divide an outside world unit by this number it will convert it to our units
-	// We are setting the mass unit to be the mass of Ceres.
-	// We are setting the length unit to be th diameter of Ceres.
-	// We are setting the time unit to be the such that the universal gravity constant is 1.
 	
 	massOfCeres = 9.383e20; // kg
 	diameterOfCeres = 940.0; // km
@@ -472,11 +462,11 @@ void getForces()
 		Force[i].z = 0.0;
 	}
 	
-	/* kWall = 20000.0;
-	kWallReduction = 0.5;
+	//kWall = 20000.0;
+	//kWallReduction = 0.5;
 	kSphere = 1000.0;
 	kSphereReduction = 0.3;
-	for(int i = 0; i < NUMBER_OF_BODIES; i++)
+	/* for(int i = 0; i < NUMBER_OF_BODIES; i++)
 	{	
 		if(25.0 < Position[i].x + BodyRadius[i] && Position[i].x + BodyRadius[i] < 26.0)
 		{
