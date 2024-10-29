@@ -213,7 +213,7 @@ void setInitialConditions()
 	printf("\n Volume of Polystyrene Sphere = %e centimeters^3", volumeOfPolystyreneSphere);
 	printf("\n");
 	
-	double totalMass = 0.0;
+	/* double totalMass = 0.0;
 	for(int i = 0; i < NUMBER_OF_BODIES; i++)
 	{
 		BodyMass[i] = ((float)rand()/(float)RAND_MAX);
@@ -243,7 +243,7 @@ void setInitialConditions()
 	}
 	printf("\n check Total mass = %e kilograms", tempMass);
 	printf("\n check Total volume = %e kilometers", tempVolume);
-	printf("\n");
+	printf("\n"); */
 	
 	
 	MassUnitConverter = massOfPolystyreneSphere/NUMBER_OF_BODIES; // kg
