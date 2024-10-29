@@ -193,24 +193,24 @@ void setInitialConditions()
 	int test;
 	int tryCount;
 	float globeSize, angle1, angle2, radius;
-	double massOfCeres;
-	double diameterOfCeres;
-	double densityOfCeres;
-	double volumeOfCeres;
-	double G = (8.649828e-13); //km^3/kg*hr^2
+	double massOfPolystyreneSphere;
+	double diameterOfPolystyreneSphere;
+	double densityOfPolystyreneSphere;
+	double volumeOfPolystyreneSphere;
+	//double G = (8.649828e-13); //km^3/kg*hr^2
 	
 	// Seeding the random number generater.
 	srand((unsigned) time(&t));
 	
-	massOfCeres = 9.383e20; // kg
-	diameterOfCeres = 940.0; // km
-	densityOfCeres = massOfCeres/((PI/6.0)*diameterOfCeres*diameterOfCeres*diameterOfCeres); // kg/km^3
-	volumeOfCeres = (PI/6.0)*diameterOfCeres*diameterOfCeres*diameterOfCeres;
+	massOfPolystyreneSphere = 0.5498; // picogram
+	diameterOfPolystyreneSphere = 1.0; // micron
+	densityOfPolystyreneSphere = 1.05; // g/cm^3
+	volumeOfPolystyreneSphere = (PI/6.0)*diameterOfPolystyreneSphere*diameterOfPolystyreneSphere*diameterOfPolystyreneSphere;
 	
-	printf("\n Mass of Ceres = %e kilograms", massOfCeres);
-	printf("\n Diameter of Ceres = %e kilometers", diameterOfCeres);
-	printf("\n Density of Ceres = %e kilograms/kilometer^3", densityOfCeres);
-	printf("\n Volume of Ceres = %e kilometers^3", volumeOfCeres);
+	printf("\n Mass of Polystyrene Sphere = %e picograms", massOfPolystyreneSphere);
+	printf("\n Diameter of Polystyrene Sphere = %e micron", diameterOfPolystyreneSphere);
+	printf("\n Density of Polystyrene Sphere = %e grams/centimeters^3", densityOfPolystyreneSphere);
+	printf("\n Volume of Polystyrene Sphere = %e centimeters^3", volumeOfPolystyreneSphere);
 	printf("\n");
 	
 	double totalMass = 0.0;
@@ -222,14 +222,14 @@ void setInitialConditions()
 	
 	for(int i = 0; i < NUMBER_OF_BODIES; i++)
 	{
-		BodyMass[i] = massOfCeres*(BodyMass[i]/totalMass);
+		BodyMass[i] = massOfPolystyreneSphere*(BodyMass[i]/totalMass);
 		printf("\n Mass %d = %e", i, BodyMass[i]);
 	}
 	
 	double volume;
 	for(int i = 0; i < NUMBER_OF_BODIES; i++)
 	{
-		volume = volumeOfCeres*(BodyMass[i]/massOfCeres);
+		volume = volumeOfPolystyreneSphere*(BodyMass[i]/massOfPolystyreneSphere);
 		BodyRadius[i] = pow(3.0*volume/(4.0*PI), 1.0/3.0);
 	}
 	
@@ -246,8 +246,8 @@ void setInitialConditions()
 	printf("\n");
 	
 	
-	MassUnitConverter = massOfCeres/NUMBER_OF_BODIES; // kg
-	LengthUnitConverter = pow(6.0*(volumeOfCeres/NUMBER_OF_BODIES)/PI,1.0/3.0); // km
+	MassUnitConverter = massOfPolystyreneSphere/NUMBER_OF_BODIES; // kg
+	LengthUnitConverter = pow(6.0*(volumeOfPolystyreneSphere/NUMBER_OF_BODIES)/PI,1.0/3.0); // km
 	TimeUnitConverter = sqrt(LengthUnitConverter*LengthUnitConverter*LengthUnitConverter/(G*MassUnitConverter)); // hr
 	
 	printf("\n MassUnitConverter = %e kilograms", MassUnitConverter);
