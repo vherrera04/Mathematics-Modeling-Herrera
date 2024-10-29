@@ -466,9 +466,9 @@ void getForces()
 	//kWallReduction = 0.5;
 	kSphere = 1000.0;
 	kSphereReduction = 0.3;
-	/* for(int i = 0; i < NUMBER_OF_BODIES; i++)
+	for(int i = 0; i < NUMBER_OF_BODIES; i++)
 	{	
-		if(25.0 < Position[i].x + BodyRadius[i] && Position[i].x + BodyRadius[i] < 26.0)
+		/* if(25.0 < Position[i].x + BodyRadius[i] && Position[i].x + BodyRadius[i] < 26.0)
 		{
 			if(-5.0 < Position[i].y && Position[i].y < 5.0 && -5.0 < Position[i].z && Position[i].z < 5.0)
 			{
