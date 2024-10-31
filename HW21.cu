@@ -63,7 +63,7 @@ void Display();
 void idle();
 void reshape(int, int);
 void KeyPressed(unsigned char, int, int);
-void setInitailConditions();
+void setInitialConditions();
 void setupBodies();
 void drawPicture();
 float4 centerOfMass();
@@ -258,7 +258,7 @@ void KeyPressed(unsigned char key, int x, int y)
 	}
 }
 
-void setInitailConditions()
+void setInitialConditions()
 {
 	time_t t;
  	// Seeding the random number generater.
@@ -652,7 +652,7 @@ void startMeUp()
 	StopTolerance = 0.0001;
 	CheckRate = 10000;
 	
-	setInitailConditions();
+	setInitialConditions();
 	printf("\033[0;31m\n\n The simulation is paused. Type p in the simulation window to start it. \n");
 	printf("\033[0m");
 }
