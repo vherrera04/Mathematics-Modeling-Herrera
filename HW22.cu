@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 4
+#define N 4 //6
 
 #define XWindowSize 2500
 #define YWindowSize 2500
@@ -31,10 +31,13 @@
 float Px[N], Py[N], Pz[N];
 float Vx[N], Vy[N], Vz[N];
 float Fx[N], Fy[N], Fz[N];
+//float Bx[N], By[N], Bz[N];
+//float Cx[N], Cy[N], Cz[N];
+//float Dx[N], Dy[N], Dz[N];
 float Mass[N], CompressionStrength[N][N], TensionStrength[N][N], NaturalLength[N][N]; 
 float Red[N][N], Green[N][N], Blue[N][N];
 
-void set_initail_conditions()
+void set_initial_conditions()
 {
 	int i,j;
 	
@@ -306,7 +309,7 @@ void control()
 {	
 	int    tdraw = 0;
 	float  time = 0.0;
-	set_initail_conditions();
+	set_initial_conditions();
 	draw_picture();
     	n_body();
 	
@@ -365,5 +368,6 @@ int main(int argc, char** argv)
 	glutDisplayFunc(Display);
 	glutReshapeFunc(reshape);
 	glutMainLoop();
+
 	return 0;
 }
