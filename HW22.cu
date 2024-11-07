@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 4 //6
+#define N 6
 
 #define XWindowSize 2500
 #define YWindowSize 2500
@@ -31,9 +31,6 @@
 float Px[N], Py[N], Pz[N];
 float Vx[N], Vy[N], Vz[N];
 float Fx[N], Fy[N], Fz[N];
-//float Bx[N], By[N], Bz[N];
-//float Cx[N], Cy[N], Cz[N];
-//float Dx[N], Dy[N], Dz[N];
 float Mass[N], CompressionStrength[N][N], TensionStrength[N][N], NaturalLength[N][N]; 
 float Red[N][N], Green[N][N], Blue[N][N];
 
@@ -94,6 +91,30 @@ void set_initial_conditions()
 	CompressionStrength[2][3] = 10.0;
 	TensionStrength[2][3] = 10.0;
 	NaturalLength[2][3] = 2.0;
+
+	CompressionStrength[4][0] = 10.0;
+	TensionStrength[4][0] = 10.0;
+	NaturalLength[4][0] = 2.0;
+
+	CompressionStrength[4][1] = 10.0;
+	TensionStrength[4][1] = 10.0;
+	NaturalLength[4][1] = 2.0;
+
+	CompressionStrength[4][2] = 10.0;
+	TensionStrength[4][2] = 10.0;
+	NaturalLength[4][2] = 2.0;
+
+	CompressionStrength[5][1] = 10.0;
+	TensionStrength[5][1] = 10.0;
+	NaturalLength[5][1] = 2.0;
+
+	CompressionStrength[5][2] = 10.0;
+	TensionStrength[5][2] = 10.0;
+	NaturalLength[5][2] = 2.0;
+
+	CompressionStrength[5][3] = 10.0;
+	TensionStrength[5][3] = 10.0;
+	NaturalLength[5][3] = 2.0;
 	
 	//Setting node positions
 	Px[0] = 0.0;
@@ -111,6 +132,14 @@ void set_initial_conditions()
 	Px[3] = 0.0;
 	Py[3] = 1.0 + DROP_HIEGHT;
 	Pz[3] = 0.0;
+
+	Px[4] = 0.0;
+	Py[4] = -1.0 + DROP_HIEGHT;
+	Pz[4] = 0.0;
+
+	Px[5] = 0.0;
+	Py[5] = 0.0 + DROP_HIEGHT;
+	Pz[5] = -1.0;
 }
 
 void draw_picture()
@@ -128,6 +157,8 @@ void draw_picture()
 		if(i == 1) glColor3d(0.0,1.0,0.0);
 		if(i == 2) glColor3d(1.0,0.0,0.0);
 		if(i == 3) glColor3d(1.0,0.0,1.0);
+		if(i == 4) glColor3d(0.0, 0.5, 1.0); 
+    		if(i == 5) glColor3d(1.0, 1.0, 0.0);
 		glPushMatrix();
 		glTranslatef(Px[i], Py[i], Pz[i]);
 		glutSolidSphere(SHERE_RADIUS,20,20);
@@ -166,8 +197,13 @@ void draw_picture()
 		glVertex3f(Px[2], Py[2], Pz[2]);   
 		glVertex3f(Px[3], Py[3], Pz[3]); 
 	glEnd();
+	glColor3d(Red[4][0], Green[4][0], Blue[4][0]);
+	glBegin(GL_LINE_STRIP);
+    		glVertex3f(Px[4], Py[4], Pz[4]);
+    		glVertex3f(Px[0], Py[0], Pz[0]);
+	glEnd();
 	
-	//Drawing the flooor
+	//Drawing the floor
 	glLineWidth(1.0);
 	glColor3d(1.0,1.0,1.0);
 	int floorSections = 100;
