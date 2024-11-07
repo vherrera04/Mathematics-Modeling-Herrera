@@ -92,10 +92,6 @@ void set_initial_conditions()
 	TensionStrength[2][3] = 10.0;
 	NaturalLength[2][3] = 2.0;
 
-	CompressionStrength[4][0] = 10.0;
-	TensionStrength[4][0] = 10.0;
-	NaturalLength[4][0] = 2.0;
-
 	CompressionStrength[4][1] = 10.0;
 	TensionStrength[4][1] = 10.0;
 	NaturalLength[4][1] = 2.0;
@@ -104,17 +100,10 @@ void set_initial_conditions()
 	TensionStrength[4][2] = 10.0;
 	NaturalLength[4][2] = 2.0;
 
-	CompressionStrength[5][1] = 10.0;
-	TensionStrength[5][1] = 10.0;
-	NaturalLength[5][1] = 2.0;
+	CompressionStrength[4][3] = 10.0;
+	TensionStrength[4][3] = 10.0;
+	NaturalLength[4][3] = 2.0;
 
-	CompressionStrength[5][2] = 10.0;
-	TensionStrength[5][2] = 10.0;
-	NaturalLength[5][2] = 2.0;
-
-	CompressionStrength[5][3] = 10.0;
-	TensionStrength[5][3] = 10.0;
-	NaturalLength[5][3] = 2.0;
 	
 	//Setting node positions
 	Px[0] = 0.0;
@@ -136,10 +125,6 @@ void set_initial_conditions()
 	Px[4] = 0.0;
 	Py[4] = -1.0 + DROP_HIEGHT;
 	Pz[4] = 0.0;
-
-	Px[5] = 0.0;
-	Py[5] = 0.0 + DROP_HIEGHT;
-	Pz[5] = -1.0;
 }
 
 void draw_picture()
@@ -158,7 +143,6 @@ void draw_picture()
 		if(i == 2) glColor3d(1.0,0.0,0.0);
 		if(i == 3) glColor3d(1.0,0.0,1.0);
 		if(i == 4) glColor3d(0.0, 0.5, 1.0); 
-    		if(i == 5) glColor3d(1.0, 1.0, 0.0);
 		glPushMatrix();
 		glTranslatef(Px[i], Py[i], Pz[i]);
 		glutSolidSphere(SPHERE_RADIUS,20,20);
@@ -197,10 +181,20 @@ void draw_picture()
 		glVertex3f(Px[2], Py[2], Pz[2]);   
 		glVertex3f(Px[3], Py[3], Pz[3]); 
 	glEnd();
-	glColor3d(Red[4][0], Green[4][0], Blue[4][0]);
+	glColor3d(Red[4][1], Green[4][1], Blue[4][1]);
 	glBegin(GL_LINE_STRIP);
     		glVertex3f(Px[4], Py[4], Pz[4]);
-    		glVertex3f(Px[0], Py[0], Pz[0]);
+    		glVertex3f(Px[1], Py[1], Pz[1]);
+	glEnd();
+	glColor3d(Red[4][2], Green[4][2], Blue[4][2]);
+	glBegin(GL_LINE_STRIP);
+    		glVertex3f(Px[4], Py[4], Pz[4]);
+    		glVertex3f(Px[2], Py[2], Pz[2]);
+	glEnd();
+	glColor3d(Red[4][3], Green[4][3], Blue[4][3]);
+	glBegin(GL_LINE_STRIP);
+    		glVertex3f(Px[4], Py[4], Pz[4]);
+    		glVertex3f(Px[3], Py[3], Pz[3]);
 	glEnd();
 	
 	//Drawing the floor
