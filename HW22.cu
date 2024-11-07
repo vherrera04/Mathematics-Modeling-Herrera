@@ -24,7 +24,7 @@
 #define STOP_TIME 100.0
 
 #define FLOOR_STRENGTH 200.0
-#define SHERE_RADIUS 0.2
+#define SPHERE_RADIUS 0.2
 #define DROP_HIEGHT 5.0
 
 // Globals
@@ -161,7 +161,7 @@ void draw_picture()
     		if(i == 5) glColor3d(1.0, 1.0, 0.0);
 		glPushMatrix();
 		glTranslatef(Px[i], Py[i], Pz[i]);
-		glutSolidSphere(SHERE_RADIUS,20,20);
+		glutSolidSphere(SPHERE_RADIUS,20,20);
 		glPopMatrix();
 	}
 	
@@ -305,7 +305,7 @@ void n_body()
 			Fy[i] += -G;
 			
 			//Adding in the push back force from the floor.
-			if((Py[i] - SHERE_RADIUS) < 0.0) Fy[i] += FLOOR_STRENGTH*(0.0 - (Py[i] - SHERE_RADIUS)); 
+			if((Py[i] - SPHERE_RADIUS) < 0.0) Fy[i] += FLOOR_STRENGTH*(0.0 - (Py[i] - SPHERE_RADIUS)); 
 		}
 
 		//Leapfrog formulas to move the nodes forward in time dt.
