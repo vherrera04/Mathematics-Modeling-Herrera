@@ -1,4 +1,4 @@
-// gcc HW22.cu -o tower -lglut -lm -lGLU -lGL
+// gcc HW22.c -o tower -lglut -lm -lGLU -lGL
 //To stop hit "control c" in the window you launched it from.
 #include <GL/glut.h>
 #include <math.h>
